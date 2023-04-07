@@ -29,6 +29,8 @@ Route::post('/register', [RegisterController::class, 'store']);
 
 
 route::get('/home', [HomeController::class, 'homeSiswa'])->name('homeSiswa')->middleware('auth');
+route::get('/home/guru', [HomeController::class, 'homeGuru'])->name('homeGuru')->middleware('auth');
+route::get('/home/admin', [HomeController::class, 'homeAdmin'])->name('homeAdmin')->middleware('auth');
 
 // Route::group(['middleware' => ['auth', 'cekRole:siswa']], function() {
 //     // route::get('/home', [HomeController::class, 'homeSiswa'])->name('homeSiswa')->middleware('auth');

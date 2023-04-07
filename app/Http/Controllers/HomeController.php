@@ -12,4 +12,18 @@ class HomeController extends Controller
             'title' => 'Home'
         ]);
     }
+
+    public function homeGuru()
+    {
+        return view('guru.home', [
+            'title' => 'Home'
+        ]);
+    }
+
+    public function homeAdmin()
+    {
+        return view('admin.home', [
+            'title' => 'Home'
+        ]);
+    }
 }
