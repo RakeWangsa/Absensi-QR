@@ -19,19 +19,23 @@ use App\Http\Controllers\RegisterController;
 Route::get('/', function () {
     return view('welcome');
 });
-Route::get('/', [App\Http\Controllers\QrcodeController::class, 'index']);
-Route::post('/post', [App\Http\Controllers\QrcodeController::class, 'post'])->name('post');
 Route::get('/login', [LoginController::class, 'index'])->name('login')->middleware('guest');
 Route::post('/login', [LoginController::class, 'authenticate']);
 Route::post('/logout', [LoginController::class, 'logout']);
 Route::get('/register', [RegisterController::class, 'index'])->middleware('guest');
 Route::post('/register', [RegisterController::class, 'store']);
 
+Route::group(['middleware' => ['auth', 'cekRole:siswa']], function() {
+    route::get('/home', [HomeController::class, 'homeSiswa'])->name('homeSiswa')->middleware('auth');
+    Route::get('/scan', [App\Http\Controllers\QrcodeController::class, 'index'])->name('scan')->middleware('auth');
+    Route::post('/post', [App\Http\Controllers\QrcodeController::class, 'post'])->name('post')->middleware('auth');
+});
 
-route::get('/home', [HomeController::class, 'homeSiswa'])->name('homeSiswa')->middleware('auth');
-route::get('/home/guru', [HomeController::class, 'homeGuru'])->name('homeGuru')->middleware('auth');
-route::get('/home/admin', [HomeController::class, 'homeAdmin'])->name('homeAdmin')->middleware('auth');
+Route::group(['middleware' => ['auth', 'cekRole:guru']], function() {
+    route::get('/home/guru', [HomeController::class, 'homeGuru'])->name('homeGuru')->middleware('auth');
+});
 
-// Route::group(['middleware' => ['auth', 'cekRole:siswa']], function() {
-//     // route::get('/home', [HomeController::class, 'homeSiswa'])->name('homeSiswa')->middleware('auth');
-// });
+Route::group(['middleware' => ['auth', 'cekRole:admin']], function() {
+    route::get('/home/admin', [HomeController::class, 'homeAdmin'])->name('homeAdmin')->middleware('auth');
+});
+

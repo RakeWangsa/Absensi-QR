@@ -15,7 +15,7 @@
             <div class="card col-md-12">
                 <div class="card-body">
                     <div class="mt-4">
-                        <a href="/">Scan Barcode</a>
+                        <a href="/scan">Scan Barcode</a>
                 </div>
             </div> 
         </div>
