@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\HomeController;
 
 /*
 |--------------------------------------------------------------------------
@@ -22,3 +23,10 @@ Route::post('/post', [App\Http\Controllers\QrcodeController::class, 'post'])->na
 Route::get('/login', [LoginController::class, 'index'])->name('login')->middleware('guest');
 Route::post('/login', [LoginController::class, 'authenticate']);
 Route::post('/logout', [LoginController::class, 'logout']);
+
+
+route::get('/home', [HomeController::class, 'homeSiswa'])->name('homeSiswa')->middleware('auth');
+
+// Route::group(['middleware' => ['auth', 'cekRole:siswa']], function() {
+//     // route::get('/home', [HomeController::class, 'homeSiswa'])->name('homeSiswa')->middleware('auth');
+// });
