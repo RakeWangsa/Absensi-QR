@@ -11,7 +11,7 @@
                <a class="nav-link collapsed {{ ($active === "absensi scanner") ? 'active' : '' }}" href="/daftar/antrian/mutu"> <i class="bi bi-qr-code-scan"></i><span>Absensi Scanner</span> </a>                 
             @elseif (auth()->user()->role=="guru")
                <a class="nav-link collapsed {{ ($active === "home") ? 'active' : '' }}" href="/home/guru"> <i class="bi bi-grid"></i><span>Home</span> </a>
-               <a class="nav-link collapsed {{ ($active === "daftar antrian") ? 'active' : '' }}" href="/daftar/antrian/cs"> <i class="bi bi-list-ul"></i><span>Daftar Kelas</span> </a>  
+               <a class="nav-link collapsed {{ ($active === "daftar kelas") ? 'active' : '' }}" href="/daftarKelas"> <i class="bi bi-list-ul"></i><span>Daftar Kelas</span> </a>  
             @endif        
          @endauth    
             {{-- @elseif (auth()->user()->level=="pengunjung")

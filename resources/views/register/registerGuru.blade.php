@@ -61,7 +61,6 @@
 
                                  
                         <div class="col-12 mt-4 mb-2"> <button class="btn btn-primary w-100" type="submit">Register</button></div>
-                        <p class="small">Sudah Punya Akun? <a href="/login">Login</a></p>
                      </form>
                   </div>
                </div>

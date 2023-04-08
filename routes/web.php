@@ -5,6 +5,7 @@ use App\Http\Controllers\LoginController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\ManagementController;
+use App\Http\Controllers\DaftarKelasController;
 use App\Http\Controllers\QrCodeController;
 
 /*
@@ -49,6 +50,9 @@ Route::group(['middleware' => ['auth', 'cekRole:siswa']], function() {
 
 Route::group(['middleware' => ['auth', 'cekRole:guru']], function() {
     route::get('/home/guru', [HomeController::class, 'homeGuru'])->name('homeGuru')->middleware('auth');
+    route::get('/daftarKelas', [DaftarKelasController::class, 'index'])->name('daftarKelas')->middleware('auth');
+    route::get('/tambahKelas', [DaftarKelasController::class, 'tambahKelas'])->name('tambahKelas')->middleware('auth');
+    route::get('/tambahKelas/submit', [DaftarKelasController::class, 'tambahKelasSubmit'])->name('tambahKelasSubmit')->middleware('auth');
 });
 
 Route::group(['middleware' => ['auth', 'cekRole:admin']], function() {

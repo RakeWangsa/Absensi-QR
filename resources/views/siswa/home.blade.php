@@ -15,10 +15,11 @@
             <div class="card col-md-12">
                 <div class="card-body">
                     <div class="mt-4">
-                        <a href="/scan">Scan Barcode</a>
+                        {{-- <a href="/scan">Scan Barcode</a> --}}
                 </div>
             </div> 
         </div>
+    </div>
         <div class="row">
             <div class="card col-md-12 mt-2">
                 <div class="card-body">
