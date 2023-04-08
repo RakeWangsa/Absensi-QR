@@ -22,7 +22,7 @@
                <div class="card mb-3">
                   <div class="card-body login">
                      <div class="pt-4 pb-2">
-                        <h5 class="card-title text-center pb-0 fs-4">REGISTER</h5>
+                        <h5 class="card-title text-center pb-0 fs-4">REGISTER SISWA</h5>
                      </div>
                      <form action="/register" method="post">
                         @csrf
