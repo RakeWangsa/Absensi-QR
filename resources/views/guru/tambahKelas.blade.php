@@ -19,12 +19,13 @@
                             </div>
                         @endif
                     </div>
-                    <form class="row g-3 mt-3" method="GET" action="">
+                    <form class="row g-3 mt-3" method="GET" action="{{route('tambahKelasSubmit')}}">
+                        <div class="col-md-12"> <label for="guru" class="form-label">Pengajar :</label> <input type="text" class="form-control" id="guru" name="guru" value="{{ $name }}" readonly></div>
                         <div class="col-md-12"> <label for="ruang" class="form-label">Ruang Kelas :</label> <input type="text" class="form-control" id="ruang" name="ruang" value="{{ old('ruang') }}"></div>
                         <div class="col-md-12"> <label for="pelajaran" class="form-label">Pelajaran :</label> <input type="text" class="form-control" id="pelajaran" name="pelajaran" value="{{ old('pelajaran') }}"></div>
                         <div class="col-md-12">
-                            <label for="jenislayanan" class="form-label">Hari :</label> 
-                            <select id="jenislayanan" class="form-select" name="jenislayanan">
+                            <label for="hari" class="form-label">Hari :</label> 
+                            <select id="hari" class="form-select" name="hari">
                                 <option>Pilih Hari!</option>
                                 <option value="Senin">Senin</option>
                                 <option value="Selasa">Selasa</option>

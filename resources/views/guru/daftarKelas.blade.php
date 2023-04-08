@@ -46,26 +46,29 @@
          <div class="card-body">
              <h5 class="card-title">Daftar Kelas</h5>
              <div class="table-container border">
-             {{-- <table>
+             <table>
                 <thead>
                    <tr>
-                    <th scope="col">No</th>
-                    <th scope="col">Kelas</th>
-                    <th scope="col">Pelajaran</th>
-                    <th scope="col">Waktu</th>
-                    <th scope="col">Action</th>
+                    <th scope="col" class="text-center">No</th>
+                    <th scope="col" class="text-center">Pengajar</th>
+                    <th scope="col" class="text-center">Ruang</th>
+                    <th scope="col" class="text-center">Pelajaran</th>
+                    <th scope="col" class="text-center">Waktu</th>
+                    <th scope="col" class="text-center">Action</th>
                    </tr>
                 </thead>
                 
                 <tbody>
                   @php($no=1)
-                  @if(count($guru) > 0)
-                  @foreach($guru as $item)
+                  @if(count($kelas) > 0)
+                  @foreach($kelas as $item)
                    <tr>
-                      <td scope="row">{{ $no++ }}</td>
-                      <td>{{ $item->name }}</td>
-                      <td>{{ $item->email }}</td>
-                      <td>
+                      <td scope="row" class="text-center">{{ $no++ }}</td>
+                      <td class="text-center">{{ $item->guru }}</td>
+                      <td class="text-center">{{ $item->ruang }}</td>
+                      <td class="text-center">{{ $item->pelajaran }}</td>
+                      <td class="text-center">{{ $item->hari }}, {{ substr($item->waktu, 0, 5) }}</td>
+                      <td class="text-center">
                         <a class="btn btn-warning" style="border-radius: 100px;" a href="{{ route('editUser', ['id' => base64_encode($item->id)]) }}"><i class="bi bi-pencil-square text-white"></i></a>
                         <a class="btn btn-danger" style="border-radius: 100px;" onclick="return confirm('Apakah anda yakin?')" a href="{{ route('hapusUser', ['id' => base64_encode($item->id)]) }}"><i class="bi bi-trash"></i></a>
                      </td>
@@ -73,11 +76,11 @@
                    @endforeach
                    @else
                    <tr>
-                     <td colspan="6" class="text-center">Tidak ada user</td>
+                     <td colspan="6" class="text-center">Tidak ada kelas</td>
                    </tr>
                    @endif
                 </tbody>
-             </table> --}}
+             </table>
             </div>
          </div>
       </div>

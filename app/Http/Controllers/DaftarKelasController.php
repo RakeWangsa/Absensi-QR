@@ -4,15 +4,27 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\User;
+use App\Models\Kelas;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Validation\Rule;
 
 class DaftarKelasController extends Controller
 {
     public function index()
     {
+        $email=session('email');
+        $name = DB::table('users')
+        ->where('email',$email)
+        ->pluck('name')
+        ->first();
+        $kelas = DB::table('kelas')
+        ->where('guru',$name)
+        ->select('*')
+        ->get();
         return view('guru.daftarKelas', [
             'title' => 'Daftar Kelas',
-            'active' => 'daftar kelas'
+            'active' => 'daftar kelas',
+            'kelas' => $kelas
         ]);
     }
     public function tambahKelas()
@@ -27,5 +39,34 @@ class DaftarKelasController extends Controller
             'active' => 'tambah kelas',
             'name' => $name
         ]);
+    }
+
+    public function tambahKelasSubmit(Request $request)
+    {
+        $messages = [
+            'required' => ':attribute wajib diisi ',
+            'hari.required' => 'Pilih Hari!',
+            'hari.not_in' => 'Pilih Hari!',
+            'ruang.required' => 'Ruang harus diisi!',
+            'pelajaran.required' => 'Pelajaran harus diisi!',
+            'waktu.required' => 'Pilih Waktu!',
+        ];
+
+        $this->validate($request, [
+            "ruang" => ['required'],
+            "pelajaran" => ['required'],
+            'hari' => ['required', Rule::notIn(['Pilih Hari!'])],
+            "waktu" => ['required'],
+        ], $messages);
+
+        Kelas::insert([
+                'guru' => $request->guru,
+                'pelajaran' => $request->pelajaran,
+                'ruang' => $request->ruang,
+                'hari' => $request->hari,
+                'waktu' => $request->waktu,
+            ]);
+
+        return redirect('/daftarKelas')->with('success');
     }
 }

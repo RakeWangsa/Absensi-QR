@@ -16,7 +16,8 @@ return new class extends Migration
             $table->timestamps();
             $table->string('ruang');
             $table->string('pelajaran');
-            $table->datetime('waktu');
+            $table->string('hari');
+            $table->time('waktu');
             $table->string('guru');
         });
     }
