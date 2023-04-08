@@ -55,5 +55,11 @@ class ManagementController extends Controller
         return redirect('/managementUser')->with('success', 'Registrasi Berhasil!');
     }
 
-    
+    public function hapusUser($id)
+    {
+        $id = base64_decode($id);
+        User::where('id', $id)->delete();
+
+        return redirect('/managementUser')->with('success');
+    }
 }
