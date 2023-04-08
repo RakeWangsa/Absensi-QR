@@ -2,16 +2,19 @@
    <ul class="sidebar-nav" id="sidebar-nav">
       <li class="nav-item">
          @auth
-            @if (auth()->user()->level=="opk")
-               <a class="nav-link collapsed {{ ($active === "operator") ? 'active' : '' }}" href="/dashboard/operator/karantina"> <i class="bi bi-grid"></i><span>Dashboard</span> </a>
-               <a class="nav-link collapsed {{ ($active === "daftar antrian") ? 'active' : '' }}" href="/daftar/antrian/karantina"> <i class="bi bi-list-ul"></i><span>Daftar Antrian</span> </a>              
-            @elseif (auth()->user()->level=="opm")
-               <a class="nav-link collapsed {{ ($active === "operator") ? 'active' : '' }}" href="/dashboard/operator/mutu"> <i class="bi bi-grid"></i><span>Dashboard</span> </a>
-               <a class="nav-link collapsed {{ ($active === "daftar antrian") ? 'active' : '' }}" href="/daftar/antrian/mutu"> <i class="bi bi-list-ul"></i><span>Daftar Antrian</span> </a>              
-            @elseif (auth()->user()->level=="ocs")
-               <a class="nav-link collapsed {{ ($active === "operator") ? 'active' : '' }}" href="/dashboard/operator/cs"> <i class="bi bi-grid"></i><span>Dashboard</span> </a>
-               <a class="nav-link collapsed {{ ($active === "daftar antrian") ? 'active' : '' }}" href="/daftar/antrian/cs"> <i class="bi bi-list-ul"></i><span>Daftar Antrian</span> </a>              
-            @elseif (auth()->user()->level=="pengunjung")
+            @if (auth()->user()->role=="admin")
+               <a class="nav-link collapsed {{ ($active === "home") ? 'active' : '' }}" href="/dashboard/operator/karantina"> <i class="bi bi-grid"></i><span>Home</span> </a>
+               <a class="nav-link collapsed {{ ($active === "management user") ? 'active' : '' }}" href="/daftar/antrian/karantina"> <i class="bi bi-people"></i><span>Management User</span> </a>              
+            @elseif (auth()->user()->role=="siswa")
+               <a class="nav-link collapsed {{ ($active === "home") ? 'active' : '' }}" href="/dashboard/operator/mutu"> <i class="bi bi-grid"></i><span>Home</span> </a>
+               <a class="nav-link collapsed {{ ($active === "daftar absen") ? 'active' : '' }}" href="/daftar/antrian/mutu"> <i class="bi bi-list-ul"></i><span>Daftar Absen</span> </a>
+               <a class="nav-link collapsed {{ ($active === "absensi scanner") ? 'active' : '' }}" href="/daftar/antrian/mutu"> <i class="bi bi-qr-code-scan"></i><span>Absensi Scanner</span> </a>                 
+            @elseif (auth()->user()->role=="guru")
+               <a class="nav-link collapsed {{ ($active === "home") ? 'active' : '' }}" href="/dashboard/operator/cs"> <i class="bi bi-grid"></i><span>Home</span> </a>
+               <a class="nav-link collapsed {{ ($active === "daftar antrian") ? 'active' : '' }}" href="/daftar/antrian/cs"> <i class="bi bi-list-ul"></i><span>Daftar Kelas</span> </a>  
+            @endif        
+         @endauth    
+            {{-- @elseif (auth()->user()->level=="pengunjung")
                <a class="nav-link collapsed {{ ($active === "pengunjung") ? 'active' : '' }}" href="/dashboard"> <i class="bi bi-grid"></i><span>Dashboard</span> </a>
                <a class="nav-link collapsed {{ ($active === "antrian") ? 'active' : '' }}" href="/ambil/antrian"> <i class="bx bxs-add-to-queue"></i><span>Ambil Antrian</span> </a>
                <a class="nav-link collapsed {{ ($active === "daftar antrian") ? 'active' : '' }}" href="/daftar/antrian"> <i class="bi bi-list-ul"></i><span>Daftar Antrian</span> </a>  
@@ -24,8 +27,8 @@
          @else
             <a class="nav-link collapsed {{ ($active === "pengunjung") ? 'active' : '' }}" href="/dashboard"> <i class="bi bi-grid"></i><span>Dashboard</span> </a>
             <a class="nav-link collapsed {{ ($active === "antrian") ? 'active' : '' }}" href="/ambil/antrian"> <i class="bx bxs-add-to-queue"></i><span>Ambil Antrian</span> </a>
-            <a class="nav-link collapsed {{ ($active === "daftar antrian") ? 'active' : '' }}" href="/daftar/antrian"> <i class="bi bi-list-ul"></i><span>Daftar Antrian</span> </a>  
-         @endauth
+            <a class="nav-link collapsed {{ ($active === "daftar antrian") ? 'active' : '' }}" href="/daftar/antrian"> <i class="bi bi-list-ul"></i><span>Daftar Antrian</span> </a>
+         @endauth   --}}
       </li>
       @auth
          <li class="nav-item">

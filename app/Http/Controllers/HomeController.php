@@ -9,21 +9,24 @@ class HomeController extends Controller
     public function homeSiswa()
     {
         return view('siswa.home', [
-            'title' => 'Home'
+            'title' => 'Home',
+            'active' => 'home'
         ]);
     }
 
     public function homeGuru()
     {
         return view('guru.home', [
-            'title' => 'Home'
+            'title' => 'Home',
+            'active' => 'home'
         ]);
     }
 
     public function homeAdmin()
     {
         return view('admin.home', [
-            'title' => 'Home'
+            'title' => 'Home',
+            'active' => 'home'
         ]);
     }
 }

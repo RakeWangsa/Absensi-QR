@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\RegisterController;
+use App\Http\Controllers\QrCodeController;
 
 /*
 |--------------------------------------------------------------------------
@@ -24,6 +25,20 @@ Route::post('/login', [LoginController::class, 'authenticate']);
 Route::post('/logout', [LoginController::class, 'logout']);
 Route::get('/register', [RegisterController::class, 'index'])->middleware('guest');
 Route::post('/register', [RegisterController::class, 'store']);
+
+Route::get('/qrcode', function () {
+    return view('qrcode');
+});
+
+Route::get('/qrcode-generate', function () {
+    $qrCode = new \SimpleSoftwareIO\QrCode\Facades\QrCode();
+    $qrCode->size(500);
+    $qrCode->format('png');
+    $qrCode->generate('https://example.com', public_path('images/qrcode.png'));
+
+    return redirect('/qrcode');
+});
+
 
 Route::group(['middleware' => ['auth', 'cekRole:siswa']], function() {
     route::get('/home', [HomeController::class, 'homeSiswa'])->name('homeSiswa')->middleware('auth');
