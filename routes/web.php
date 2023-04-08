@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\RegisterController;
+use App\Http\Controllers\ManagementController;
 use App\Http\Controllers\QrCodeController;
 
 /*
@@ -52,5 +53,11 @@ Route::group(['middleware' => ['auth', 'cekRole:guru']], function() {
 
 Route::group(['middleware' => ['auth', 'cekRole:admin']], function() {
     route::get('/home/admin', [HomeController::class, 'homeAdmin'])->name('homeAdmin')->middleware('auth');
+    Route::get('/managementUser', [ManagementController::class, 'index'])->name('managementUser')->middleware('auth');
+    Route::get('/registerGuru', [ManagementController::class, 'tambah'])->name('registerGuru')->middleware('auth');
+    Route::post('/registerGuru', [ManagementController::class, 'store'])->middleware('auth');
+    Route::get('/editUser/{id}', [ManagementController::class, 'editUser'])->name('editUser')->middleware('auth');
+    Route::get('/updateUser/{id}', [ManagementController::class, 'updateUser'])->name('updateUser');
+    Route::get('/hapusUser/{id}', [ManagementController::class, 'hapusUser'])->name('hapusUser')->middleware('auth');
 });
 
