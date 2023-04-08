@@ -3,25 +3,7 @@
 @section('container')
 <div class="pagetitle mt-3">
    <h1>Management User</h1>
-   <nav>
-   <ol class="breadcrumb">
-       <li class="breadcrumb-item"><a href="/dashboard/admin">Home</a></li>
-       <li class="breadcrumb-item active">Daftar User</li>
-   </ol>
-   <!-- Dropdown menu -->
-      <div class="dropdown">
-         <a class="btn btn-primary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
-         Tambah Operator
-         </a>
-      
-         <!-- Dropdown items -->
-         <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-         <li><a class="dropdown-item" href="/tambahOperator/opk">Karantina</a></li>
-         <li><a class="dropdown-item" href="/tambahOperator/opm">Mutu</a></li>
-         <li><a class="dropdown-item" href="/tambahOperator/ocs">CS</a></li>
-         </ul>
-      </div>
-   </nav>
+   <a class="btn btn-primary mt-4" href="/registerGuru">Register Guru</a>
 </div>
 
 <style>
@@ -74,8 +56,8 @@
                       <td>{{ $item->name }}</td>
                       <td>{{ $item->email }}</td>
                       <td>
-                        {{-- <a class="btn btn-warning" style="border-radius: 100px;" a href="{{ route('editUser', ['id' => base64_encode($item->id)]) }}"><i class="bi bi-pencil-square text-white"></i></a>
-                        <a class="btn btn-danger" style="border-radius: 100px;" onclick="return confirm('Apakah anda yakin?')" a href="{{ route('hapusUser', ['id' => base64_encode($item->id)]) }}"><i class="bi bi-trash"></i></a> --}}
+                        <a class="btn btn-warning" style="border-radius: 100px;" a href="{{ route('editUser', ['id' => base64_encode($item->id)]) }}"><i class="bi bi-pencil-square text-white"></i></a>
+                        <a class="btn btn-danger" style="border-radius: 100px;" onclick="return confirm('Apakah anda yakin?')" a href="{{ route('hapusUser', ['id' => base64_encode($item->id)]) }}"><i class="bi bi-trash"></i></a>
                      </td>
                    </tr>
                    @endforeach
@@ -114,8 +96,8 @@
                      <td>{{ $item->name }}</td>
                      <td>{{ $item->email }}</td>
                      <td>
-                        {{-- <a class="btn btn-warning" style="border-radius: 100px;" a href="{{ route('editUser', ['id' => base64_encode($item->id)]) }}"><i class="bi bi-pencil-square text-white"></i></a>
-                        <a class="btn btn-danger" style="border-radius: 100px;" onclick="return confirm('Apakah anda yakin?')" a href="{{ route('hapusUser', ['id' => base64_encode($item->id)]) }}"><i class="bi bi-trash"></i></a> --}}
+                        <a class="btn btn-warning" style="border-radius: 100px;" a href="{{ route('editUser', ['id' => base64_encode($item->id)]) }}"><i class="bi bi-pencil-square text-white"></i></a>
+                        <a class="btn btn-danger" style="border-radius: 100px;" onclick="return confirm('Apakah anda yakin?')" a href="{{ route('hapusUser', ['id' => base64_encode($item->id)]) }}"><i class="bi bi-trash"></i></a>
                      </td>
                   </tr>
                   @endforeach

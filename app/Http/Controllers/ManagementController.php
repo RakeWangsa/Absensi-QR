@@ -29,5 +29,31 @@ class ManagementController extends Controller
         ]);
     }
 
+    public function tambah(Request $request)
+    {
+        return view('register.registerGuru', [
+            'title' => 'Register Guru',
+            'active' => 'register guru',
+        ]);
+    }
+
+    public function store(Request $request)
+    {
+        $validatedData = $request->validate([
+            'name' => 'required|max:255',
+            'email' => 'required|email:dns|unique:users',
+            'password' => 'required|min:5|max:255'
+        ]);
+        $validatedData['role'] = 'guru';
+        //$validatedData['password'] = bcrypt($validatedData['password']);
+        $validatedData['password'] = Hash::make($validatedData['password']);
+
+        User::create($validatedData);
+
+        //$request->session()->flash('success', 'Registration successfully! Please login!');
+
+        return redirect('/managementUser')->with('success', 'Registrasi Berhasil!');
+    }
+
     
 }
