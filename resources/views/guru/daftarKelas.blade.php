@@ -44,7 +44,7 @@
 <div class="row">
       <div class="card col-md-12 mt-2 pb-4">
          <div class="card-body">
-             <h5 class="card-title">Daftar Kelas</h5>
+             <h5 class="card-title">Daftar Kelas Anda</h5>
              <div class="table-container border">
              <table>
                 <thead>
@@ -84,5 +84,45 @@
             </div>
          </div>
       </div>
+</div>
+
+<div class="row">
+   <div class="card col-md-12 mt-2 pb-4">
+      <div class="card-body">
+          <h5 class="card-title">Daftar Semua Kelas</h5>
+          <div class="table-container border">
+          <table>
+             <thead>
+                <tr>
+                 <th scope="col" class="text-center">No</th>
+                 <th scope="col" class="text-center">Pengajar</th>
+                 <th scope="col" class="text-center">Ruang</th>
+                 <th scope="col" class="text-center">Pelajaran</th>
+                 <th scope="col" class="text-center">Waktu</th>
+                </tr>
+             </thead>
+             
+             <tbody>
+               @php($no=1)
+               @if(count($semuaKelas) > 0)
+               @foreach($semuaKelas as $item)
+                <tr>
+                   <td scope="row" class="text-center">{{ $no++ }}</td>
+                   <td class="text-center">{{ $item->guru }}</td>
+                   <td class="text-center">{{ $item->ruang }}</td>
+                   <td class="text-center">{{ $item->pelajaran }}</td>
+                   <td class="text-center">{{ $item->hari }}, {{ substr($item->waktu, 0, 5) }}</td>
+                </tr>
+                @endforeach
+                @else
+                <tr>
+                  <td colspan="6" class="text-center">Tidak ada kelas</td>
+                </tr>
+                @endif
+             </tbody>
+          </table>
+         </div>
+      </div>
+   </div>
 </div>
 @endsection

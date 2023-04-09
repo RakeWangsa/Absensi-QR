@@ -21,10 +21,14 @@ class DaftarKelasController extends Controller
         ->where('guru',$name)
         ->select('*')
         ->get();
+        $semuaKelas = DB::table('kelas')
+        ->select('*')
+        ->get();
         return view('guru.daftarKelas', [
             'title' => 'Daftar Kelas',
             'active' => 'daftar kelas',
-            'kelas' => $kelas
+            'kelas' => $kelas,
+            'semuaKelas' => $semuaKelas
         ]);
     }
     public function tambahKelas()
