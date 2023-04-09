@@ -22,19 +22,19 @@ class HomeController extends Controller
         $skrg = Carbon::now()->addHours(7);
         $hari_ini = $skrg->format('N'); // 1 untuk Senin, 2 untuk Selasa, dan seterusnya
         if($hari_ini=='1'){
-            $hari_ini2='senin';
+            $hari_ini2='Senin';
         }else if($hari_ini=='2'){
-            $hari_ini2='selasa';
+            $hari_ini2='Selasa';
         }else if($hari_ini=='3'){
-            $hari_ini2='rabu';
+            $hari_ini2='Rabu';
         }else if($hari_ini=='4'){
-            $hari_ini2='kamis';
+            $hari_ini2='Kamis';
         }else if($hari_ini=='5'){
-            $hari_ini2='jumat';
+            $hari_ini2='Jumat';
         }else if($hari_ini=='6'){
-            $hari_ini2='sabtu';
+            $hari_ini2='Sabtu';
         }else if($hari_ini=='7'){
-            $hari_ini2='minggu';
+            $hari_ini2='Minggu';
         }
 
         $name = DB::table('users')
