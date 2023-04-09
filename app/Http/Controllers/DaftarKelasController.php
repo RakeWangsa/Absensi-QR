@@ -69,4 +69,50 @@ class DaftarKelasController extends Controller
 
         return redirect('/daftarKelas')->with('success');
     }
+
+    public function editKelas($id)
+    {
+        $id = base64_decode($id);
+        $kelas = DB::table('kelas')
+        ->where('id',$id)
+        ->select('id', 'ruang', 'pelajaran', 'guru', 'hari', 'waktu')
+        ->get();
+        return view('guru.editKelas', [
+            "title" => "Edit User",
+            'active' => 'edit user',
+            'kelas' => $kelas,
+            'id' => $id
+        ]);
+    }
+
+    public function updateKelas(Request $request, $id)
+    {
+        $id = base64_decode($id);
+        $messages = [
+            'required' => ':attribute wajib diisi ',
+            'hari.required' => 'Pilih Hari!',
+            'hari.not_in' => 'Pilih Hari!',
+            'ruang.required' => 'Ruang harus diisi!',
+            'pelajaran.required' => 'Pelajaran harus diisi!',
+            'waktu.required' => 'Pilih Waktu!',
+        ];
+
+        $this->validate($request, [
+            "ruang" => ['required'],
+            "pelajaran" => ['required'],
+            'hari' => ['required', Rule::notIn(['Pilih Hari!'])],
+            "waktu" => ['required'],
+        ], $messages);
+
+        Kelas::where('id', $id)->update([
+            'guru' => $request->guru,
+            'pelajaran' => $request->pelajaran,
+            'ruang' => $request->ruang,
+            'hari' => $request->hari,
+            'waktu' => $request->waktu,
+        ]);        
+
+        return redirect('/daftarKelas')->with('success');
+    }
+
 }
