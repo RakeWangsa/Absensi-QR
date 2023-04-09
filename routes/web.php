@@ -55,15 +55,16 @@ Route::group(['middleware' => ['auth', 'cekRole:guru']], function() {
     route::get('/tambahKelas/submit', [DaftarKelasController::class, 'tambahKelasSubmit'])->name('tambahKelasSubmit')->middleware('auth');
     Route::get('/editKelas/{id}', [DaftarKelasController::class, 'editKelas'])->name('editKelas')->middleware('auth');
     Route::get('/updateKelas/{id}', [DaftarKelasController::class, 'updateKelas'])->name('updateKelas')->middleware('auth');
+    Route::get('/hapusKelas/{id}', [DaftarKelasController::class, 'hapusKelas'])->name('hapusKelas')->middleware('auth');
 });
 
 Route::group(['middleware' => ['auth', 'cekRole:admin']], function() {
     route::get('/home/admin', [HomeController::class, 'homeAdmin'])->name('homeAdmin')->middleware('auth');
     Route::get('/managementUser', [ManagementController::class, 'index'])->name('managementUser')->middleware('auth');
     Route::get('/registerGuru', [ManagementController::class, 'tambah'])->name('registerGuru')->middleware('auth');
-    Route::post('/registerGuru', [ManagementController::class, 'store'])->middleware('auth');
+    Route::post('/registerGuru', [ManagementController::class, 'store'])->middleware('auth')->middleware('auth');
     Route::get('/editUser/{id}', [ManagementController::class, 'editUser'])->name('editUser')->middleware('auth');
-    Route::get('/updateUser/{id}', [ManagementController::class, 'updateUser'])->name('updateUser');
+    Route::get('/updateUser/{id}', [ManagementController::class, 'updateUser'])->name('updateUser')->middleware('auth');
     Route::get('/hapusUser/{id}', [ManagementController::class, 'hapusUser'])->name('hapusUser')->middleware('auth');
 });
 

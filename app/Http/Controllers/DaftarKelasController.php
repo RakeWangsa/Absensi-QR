@@ -115,4 +115,12 @@ class DaftarKelasController extends Controller
         return redirect('/daftarKelas')->with('success');
     }
 
+    public function hapusKelas($id)
+    {
+        $id = base64_decode($id);
+        Kelas::where('id', $id)->delete();
+
+        return redirect('/daftarKelas')->with('success');
+    }
+
 }

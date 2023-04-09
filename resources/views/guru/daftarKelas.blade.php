@@ -70,7 +70,7 @@
                       <td class="text-center">{{ $item->hari }}, {{ substr($item->waktu, 0, 5) }}</td>
                       <td class="text-center">
                         <a class="btn btn-warning" style="border-radius: 100px;" a href="{{ route('editKelas', ['id' => base64_encode($item->id)]) }}"><i class="bi bi-pencil-square text-white"></i></a>
-                        {{-- <a class="btn btn-danger" style="border-radius: 100px;" onclick="return confirm('Apakah anda yakin?')" a href="{{ route('hapusKelas', ['id' => base64_encode($item->id)]) }}"><i class="bi bi-trash"></i></a> --}}
+                        <a class="btn btn-danger" style="border-radius: 100px;" onclick="return confirm('Apakah anda yakin?')" a href="{{ route('hapusKelas', ['id' => base64_encode($item->id)]) }}"><i class="bi bi-trash"></i></a>
                      </td>
                    </tr>
                    @endforeach
