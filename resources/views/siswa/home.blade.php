@@ -8,31 +8,34 @@
             <h1>Home</h1>
          </div>
          <div class="col-auto">
-            <button class="btn btn-primary" data-toggle="modal" data-target="#myModal"><i class="bi bi-person-fill-add me-2"></i><span>Tambah Kelas</span></button>
-            <!--Modal-->
-<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title" id="myModalLabel">Form Pop Up</h4>
+            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+               <i class="bi bi-person-fill-add me-2"></i><span>Tambah Kelas</span>
+            </button>
+                <!-- Modal -->
+            <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+               <div class="modal-dialog">
+               <div class="modal-content">
+                  <form class="row g-3 mt-3" method="GET" action="/tambahKelasSiswa">
+                  <div class="modal-header">
+                     <h1 class="modal-title fs-5" id="exampleModalLabel">Tambah Kelas</h1>
+                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                  </div>
+                  <div class="modal-body">
+                     
+                        <div class="col-md-12"> <label for="idkelas" class="form-label">Masukkan ID Kelas :</label> <input type="text" class="form-control" id="idkelas" name="idkelas" value=""></div>
+                     
+                  </div>
+                  <div class="modal-footer">
+                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                     <button type="submit" class="btn btn-primary">Save changes</button>
+                  </div>
+               </form>
+               </div>
+               </div>
             </div>
-            <div class="modal-body">
-                <!--Isi form di sini-->
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Save changes</button>
-            </div>
-        </div>
-    </div>
-</div>
-
-
          </div>
       </div>
    </div>
-   
 </div>
 
 
@@ -63,11 +66,15 @@
 
 
 <div class="row">
+
+   
+
+
       <div class="card col-md-12 mt-2 pb-4">
          <div class="card-body">
              <h5 class="card-title">Daftar Kelas Anda Hari Ini</h5>
              <div class="table-container border">
-             {{-- <table>
+             <table>
                 <thead>
                    <tr>
                     <th scope="col" class="text-center">No</th>
@@ -82,8 +89,8 @@
                 
                 <tbody>
                   @php($no=1)
-                  @if(count($kelas) > 0)
-                  @foreach($kelas as $item)
+                  @if(count($kelasHariIni) > 0)
+                  @foreach($kelasHariIni as $item)
                    <tr>
                       <td scope="row" class="text-center">{{ $no++ }}</td>
                       <td class="text-center">{{ $item->id }}</td>
@@ -103,7 +110,7 @@
                    </tr>
                    @endif
                 </tbody>
-             </table> --}}
+             </table>
             </div>
          </div>
       </div>
@@ -114,7 +121,7 @@
       <div class="card-body">
           <h5 class="card-title">Daftar Kelas Anda</h5>
           <div class="table-container border">
-          {{-- <table>
+          <table>
              <thead>
                 <tr>
                  <th scope="col" class="text-center">No</th>
@@ -123,13 +130,14 @@
                  <th scope="col" class="text-center">Ruang</th>
                  <th scope="col" class="text-center">Pelajaran</th>
                  <th scope="col" class="text-center">Waktu</th>
+                 <th scope="col" class="text-center">Action</th>
                 </tr>
              </thead>
              
              <tbody>
                @php($no=1)
-               @if(count($semuaKelas) > 0)
-               @foreach($semuaKelas as $item)
+               @if(count($kelasku) > 0)
+               @foreach($kelasku as $item)
                 <tr>
                    <td scope="row" class="text-center">{{ $no++ }}</td>
                    <td class="text-center">{{ $item->id }}</td>
@@ -137,6 +145,9 @@
                    <td class="text-center">{{ $item->ruang }}</td>
                    <td class="text-center">{{ $item->pelajaran }}</td>
                    <td class="text-center">{{ $item->hari }}, {{ substr($item->waktu, 0, 5) }}</td>
+                   <td class="text-center">
+                     <a class="btn btn-danger" style="border-radius: 100px;" onclick="return confirm('Apakah anda yakin?')" a href="{{ route('hapusKelas', ['id' => base64_encode($item->id)]) }}"><i class="bi bi-trash"></i></a>
+                  </td>
                 </tr>
                 @endforeach
                 @else
@@ -145,9 +156,26 @@
                 </tr>
                 @endif
              </tbody>
-          </table> --}}
+          </table>
          </div>
       </div>
    </div>
 </div>
+<script>
+  // ambil elemen form dan input
+  var form = document.querySelector('#exampleModal form');
+  var inputIdKelas = document.querySelector('#idkelas');
+  
+  // tambahkan event listener pada saat form disubmit
+  form.addEventListener('submit', function(event) {
+    // cek apakah input kosong atau tidak
+    if (inputIdKelas.value.trim() === '') {
+      // jika kosong, berikan alert
+      alert('Kolom inputan belum diisi!');
+      // hentikan proses submit form
+      event.preventDefault();
+    }
+  });
+</script>
+
 @endsection

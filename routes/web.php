@@ -44,6 +44,7 @@ Route::get('/qrcode-generate', function () {
 
 Route::group(['middleware' => ['auth', 'cekRole:siswa']], function() {
     route::get('/home', [HomeController::class, 'homeSiswa'])->name('homeSiswa')->middleware('auth');
+    route::get('/tambahKelasSiswa', [HomeController::class, 'tambahKelasSiswa'])->name('tambahKelasSiswa')->middleware('auth');
     Route::get('/scan', [App\Http\Controllers\QrcodeController::class, 'index'])->name('scan')->middleware('auth');
     Route::post('/post', [App\Http\Controllers\QrcodeController::class, 'post'])->name('post')->middleware('auth');
 });
