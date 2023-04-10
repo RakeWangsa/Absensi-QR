@@ -5,36 +5,15 @@
    <div class="container">
       <div class="row align-items-center">
          <div class="col">
-            <h1>Home</h1>
+            <h1>Daftar Kelas</h1>
          </div>
          <div class="col-auto">
-            <button class="btn btn-primary" data-toggle="modal" data-target="#myModal"><i class="bi bi-person-fill-add me-2"></i><span>Tambah Kelas</span></button>
-            <!--Modal-->
-<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title" id="myModalLabel">Form Pop Up</h4>
-            </div>
-            <div class="modal-body">
-                <!--Isi form di sini-->
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Save changes</button>
-            </div>
-        </div>
-    </div>
-</div>
-
-
+            <a class="btn btn-primary mt-4" href="/tambahKelas"><i class="bi bi-person-fill-add me-2"></i><span>Tambah Kelas</span></a>
          </div>
       </div>
    </div>
    
 </div>
-
 
 <style>
    .table-container {
@@ -65,9 +44,9 @@
 <div class="row">
       <div class="card col-md-12 mt-2 pb-4">
          <div class="card-body">
-             <h5 class="card-title">Daftar Kelas Anda Hari Ini</h5>
+             <h5 class="card-title">Daftar Kelas Anda</h5>
              <div class="table-container border">
-             {{-- <table>
+             <table>
                 <thead>
                    <tr>
                     <th scope="col" class="text-center">No</th>
@@ -103,7 +82,7 @@
                    </tr>
                    @endif
                 </tbody>
-             </table> --}}
+             </table>
             </div>
          </div>
       </div>
@@ -112,9 +91,9 @@
 <div class="row">
    <div class="card col-md-12 mt-2 pb-4">
       <div class="card-body">
-          <h5 class="card-title">Daftar Kelas Anda</h5>
+          <h5 class="card-title">Daftar Semua Kelas</h5>
           <div class="table-container border">
-          {{-- <table>
+          <table>
              <thead>
                 <tr>
                  <th scope="col" class="text-center">No</th>
@@ -145,7 +124,7 @@
                 </tr>
                 @endif
              </tbody>
-          </table> --}}
+          </table>
          </div>
       </div>
    </div>
