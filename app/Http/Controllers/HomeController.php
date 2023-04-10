@@ -10,9 +10,20 @@ class HomeController extends Controller
 {
     public function homeSiswa()
     {
+        $email=session('email');
+        $nama = DB::table('users')
+        ->where('email',$email)
+        ->pluck('name')
+        ->first();
+        $kelasSiswa = DB::table('kelasSiswa')
+        ->where('nama',$nama)
+        ->select('*')
+        ->get();
+
         return view('siswa.home', [
             'title' => 'Home',
-            'active' => 'home'
+            'active' => 'home',
+            'kelasSiswa' => $kelasSiswa
         ]);
     }
 

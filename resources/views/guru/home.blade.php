@@ -47,6 +47,7 @@
                 <thead>
                    <tr>
                     <th scope="col" class="text-center">No</th>
+                    <th scope="col" class="text-center">ID Kelas</th>
                     <th scope="col" class="text-center">Pengajar</th>
                     <th scope="col" class="text-center">Ruang</th>
                     <th scope="col" class="text-center">Pelajaran</th>
@@ -61,6 +62,7 @@
                   @foreach($kelas as $item)
                    <tr>
                       <td scope="row" class="text-center">{{ $no++ }}</td>
+                      <td class="text-center">{{ $item->id }}</td>
                       <td class="text-center">{{ $item->guru }}</td>
                       <td class="text-center">{{ $item->ruang }}</td>
                       <td class="text-center">{{ $item->pelajaran }}</td>
