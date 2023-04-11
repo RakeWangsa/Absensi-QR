@@ -36,10 +36,6 @@ class HomeController extends Controller
         ->where('email',$email)
         ->pluck('id')
         ->first();
-        $password = DB::table('users')
-        ->where('email',$email)
-        ->pluck('password')
-        ->first();
         $kelasSiswa = DB::table('kelasSiswa')
         ->where('id_siswa',$id)
         ->select('kelas')
@@ -65,7 +61,34 @@ class HomeController extends Controller
             'active' => 'home',
             'kelasku' => $kelasku,
             'kelaskuHariIni' => $kelaskuHariIni,
-            'password' => $password
+        ]);
+    }
+
+    public function daftarKelasSiswa()
+    {
+        $email=session('email');
+        $id = DB::table('users')
+        ->where('email',$email)
+        ->pluck('id')
+        ->first();
+        $kelasSiswa = DB::table('kelasSiswa')
+        ->where('id_siswa',$id)
+        ->select('kelas')
+        ->get();
+        
+        $cek_array = array_filter(explode(',', $kelasSiswa));
+
+        $kelas = DB::table('kelas')
+        ->select('*');
+        foreach ($cek_array as $value) {
+            $kelas->orWhere('id', 'like', '%' . $value . '%');
+        }
+        $kelasku = $kelas->get();
+
+        return view('siswa.daftarKelas', [
+            'title' => 'Home',
+            'active' => 'home',
+            'kelasku' => $kelasku,
         ]);
     }
 
@@ -109,7 +132,7 @@ class HomeController extends Controller
         }
         
 
-        return redirect('/home')->with('success');
+        return redirect('/daftarKelasSiswa')->with('success');
     }
 
     public function hapusKelasSiswa($id)
@@ -126,7 +149,7 @@ class HomeController extends Controller
         ->update(['kelas' => DB::raw("REPLACE(kelas, '$hapus', '')")]);
 
 
-        return redirect('/home')->with('success');
+        return redirect('/daftarKelasSiswa')->with('success');
     }
     public function homeGuru()
     {

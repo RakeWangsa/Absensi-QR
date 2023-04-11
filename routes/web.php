@@ -44,6 +44,7 @@ Route::get('/qrcode-generate', function () {
 
 Route::group(['middleware' => ['auth', 'cekRole:siswa']], function() {
     route::get('/home', [HomeController::class, 'homeSiswa'])->name('homeSiswa')->middleware('auth');
+    route::get('/daftarKelasSiswa', [HomeController::class, 'daftarKelasSiswa'])->name('daftarKelasSiswa')->middleware('auth');
     route::get('/tambahKelasSiswa', [HomeController::class, 'tambahKelasSiswa'])->name('tambahKelasSiswa')->middleware('auth');
     route::get('/hapusKelasSiswa/{id}', [HomeController::class, 'hapusKelasSiswa'])->name('hapusKelasSiswa')->middleware('auth');
     Route::get('/scan', [App\Http\Controllers\QrcodeController::class, 'index'])->name('scan')->middleware('auth');
@@ -53,6 +54,7 @@ Route::group(['middleware' => ['auth', 'cekRole:siswa']], function() {
 Route::group(['middleware' => ['auth', 'cekRole:guru']], function() {
     route::get('/home/guru', [HomeController::class, 'homeGuru'])->name('homeGuru')->middleware('auth');
     route::get('/daftarKelas', [DaftarKelasController::class, 'index'])->name('daftarKelas')->middleware('auth');
+    route::get('/daftarSiswa/{id}', [DaftarKelasController::class, 'daftarSiswa'])->name('daftarSiswa')->middleware('auth');
     route::get('/tambahKelas', [DaftarKelasController::class, 'tambahKelas'])->name('tambahKelas')->middleware('auth');
     route::get('/tambahKelas/submit', [DaftarKelasController::class, 'tambahKelasSubmit'])->name('tambahKelasSubmit')->middleware('auth');
     Route::get('/editKelas/{id}', [DaftarKelasController::class, 'editKelas'])->name('editKelas')->middleware('auth');

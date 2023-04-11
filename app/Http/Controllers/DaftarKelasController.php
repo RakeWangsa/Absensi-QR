@@ -31,6 +31,24 @@ class DaftarKelasController extends Controller
             'semuaKelas' => $semuaKelas
         ]);
     }
+
+    public function daftarSiswa($id)
+    {
+
+        $id = base64_decode($id);
+        $siswa = DB::table('kelasSiswa')
+            ->where('kelas', 'like', '%' . $id . '%')
+            ->select('*')
+            ->get();
+        
+        return view('guru.daftarSiswa', [
+            'title' => 'Daftar Siswa',
+            'active' => 'daftar siswa',
+            'siswa' => $siswa,
+            'id' => $id
+        ]);
+    }
+
     public function tambahKelas()
     {
         $email=session('email');
