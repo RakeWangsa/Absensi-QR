@@ -5,7 +5,7 @@
    <div class="container">
       <div class="row align-items-center">
          <div class="col">
-            <h1>Home</h1>
+            <h1>Absensi</h1>
          </div>
       </div>
    </div>
@@ -37,13 +37,27 @@
    
    </style>
 
+<div class="container">
+    <div class="row d-flex justify-content-center align-items-center">
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-body text-center mt-4">
+                    <p class="mt-3">Scan QR Code dibawah untuk melakukan absen</p>
+                    {!! QrCode::size(250)->generate($rand) !!}
+                    <p class="mt-3">{{ $rand }}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
 
 <div class="row">
       <div class="card col-md-12 mt-2 pb-4">
          <div class="card-body">
-             <h5 class="card-title">Daftar Kelas Anda Hari Ini</h5>
+             <h5 class="card-title">Daftar Hadir Siswa</h5>
              <div class="table-container border">
-             <table>
+             {{-- <table>
                 <thead>
                    <tr>
                     <th scope="col" class="text-center">No</th>
@@ -68,7 +82,7 @@
                       <td class="text-center">{{ $item->pelajaran }}</td>
                       <td class="text-center">{{ $item->hari }}, {{ substr($item->waktu, 0, 5) }}</td>
                       <td class="text-center">
-                        <a class="btn btn-success" style="border-radius: 100px;" a href="{{ route('absensi', ['id' => base64_encode($item->id)]) }}"><i class="bi bi-qr-code-scan text-white"></i></a>
+                        <a class="btn btn-success" style="border-radius: 100px;" a href="{{ route('editKelas', ['id' => base64_encode($item->id)]) }}"><i class="bi bi-qr-code-scan text-white"></i></a>
                      </td>
                    </tr>
                    @endforeach
@@ -78,7 +92,7 @@
                    </tr>
                    @endif
                 </tbody>
-             </table>
+             </table> --}}
             </div>
          </div>
       </div>

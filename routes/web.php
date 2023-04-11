@@ -28,18 +28,18 @@ Route::post('/logout', [LoginController::class, 'logout']);
 Route::get('/register', [RegisterController::class, 'index'])->middleware('guest');
 Route::post('/register', [RegisterController::class, 'store']);
 
-Route::get('/qrcode', function () {
-    return view('qrcode');
-});
+// Route::get('/qrcode', function () {
+//     return view('qrcode');
+// });
 
-Route::get('/qrcode-generate', function () {
-    $qrCode = new \SimpleSoftwareIO\QrCode\Facades\QrCode();
-    $qrCode->size(500);
-    $qrCode->format('png');
-    $qrCode->generate('https://example.com', public_path('images/qrcode.png'));
+// Route::get('/qrcode-generate', function () {
+//     $qrCode = new \SimpleSoftwareIO\QrCode\Facades\QrCode();
+//     $qrCode->size(500);
+//     $qrCode->format('png');
+//     $qrCode->generate('https://example.com', public_path('images/qrcode.png'));
 
-    return redirect('/qrcode');
-});
+//     return redirect('/qrcode');
+// });
 
 
 Route::group(['middleware' => ['auth', 'cekRole:siswa']], function() {
@@ -53,6 +53,7 @@ Route::group(['middleware' => ['auth', 'cekRole:siswa']], function() {
 
 Route::group(['middleware' => ['auth', 'cekRole:guru']], function() {
     route::get('/home/guru', [HomeController::class, 'homeGuru'])->name('homeGuru')->middleware('auth');
+    route::get('/home/absensi/{id}', [HomeController::class, 'absensi'])->name('absensi')->middleware('auth');
     route::get('/daftarKelas', [DaftarKelasController::class, 'index'])->name('daftarKelas')->middleware('auth');
     route::get('/daftarSiswa/{id}', [DaftarKelasController::class, 'daftarSiswa'])->name('daftarSiswa')->middleware('auth');
     route::get('/tambahKelas', [DaftarKelasController::class, 'tambahKelas'])->name('tambahKelas')->middleware('auth');
