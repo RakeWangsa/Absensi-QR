@@ -89,8 +89,8 @@
                 
                 <tbody>
                   @php($no=1)
-                  @if(count($kelasHariIni) > 0)
-                  @foreach($kelasHariIni as $item)
+                  @if(count($kelaskuHariIni) > 0)
+                  @foreach($kelaskuHariIni as $item)
                    <tr>
                       <td scope="row" class="text-center">{{ $no++ }}</td>
                       <td class="text-center">{{ $item->id }}</td>
@@ -146,7 +146,7 @@
                    <td class="text-center">{{ $item->pelajaran }}</td>
                    <td class="text-center">{{ $item->hari }}, {{ substr($item->waktu, 0, 5) }}</td>
                    <td class="text-center">
-                     <a class="btn btn-danger" style="border-radius: 100px;" onclick="return confirm('Apakah anda yakin?')" a href="{{ route('hapusKelas', ['id' => base64_encode($item->id)]) }}"><i class="bi bi-trash"></i></a>
+                     <a class="btn btn-danger" style="border-radius: 100px;" onclick="return confirm('Apakah anda yakin?')" a href="{{ route('hapusKelasSiswa', ['id' => base64_encode($item->id)]) }}"><i class="bi bi-trash"></i></a>
                   </td>
                 </tr>
                 @endforeach

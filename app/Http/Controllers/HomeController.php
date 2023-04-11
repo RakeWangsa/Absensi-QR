@@ -40,24 +40,27 @@ class HomeController extends Controller
         ->where('id_siswa',$id)
         ->select('kelas')
         ->get();
+        
         $cek_array = array_filter(explode(',', $kelasSiswa));
 
         $kelas = DB::table('kelas')
         ->select('*');
-
-
         foreach ($cek_array as $value) {
             $kelas->orWhere('id', 'like', '%' . $value . '%');
         }
-        
         $kelasku = $kelas->get();
-        $kelasHariIni = $kelas->where('hari',$hari_ini2)->get();
 
+        $kelasHariIni = DB::table('kelas')
+        ->select('*');
+        foreach ($cek_array as $value) {
+            $kelasHariIni->orWhere('id', 'like', '%' . $value . '%')->where('hari',$hari_ini2);
+        }
+        $kelaskuHariIni = $kelasHariIni->get();
         return view('siswa.home', [
             'title' => 'Home',
             'active' => 'home',
             'kelasku' => $kelasku,
-            'kelasHariIni' => $kelasHariIni
+            'kelaskuHariIni' => $kelaskuHariIni
         ]);
     }
 
@@ -81,12 +84,42 @@ class HomeController extends Controller
         ->where('email',$email)
         ->pluck('id')
         ->first();
-        
-        KelasSiswa::insert([
+        $kelasSiswa = DB::table('kelasSiswa')
+        ->where('id_siswa',$id_siswa)
+        ->pluck('kelas')
+        ->first();
+
+        if(isset($kelasSiswa)){
+            KelasSiswa::where('id_siswa', $id_siswa)
+            ->update([
+                'kelas' => $kelasSiswa.$request->idkelas.','
+        ]);
+
+        }else{
+            KelasSiswa::insert([
                 'id_siswa' => $id_siswa,
                 'nama' => $name,
                 'kelas' => $request->idkelas.','
             ]);
+        }
+        
+
+        return redirect('/home')->with('success');
+    }
+
+    public function hapusKelasSiswa($id)
+    {
+        $hapus = base64_decode($id);
+        $email=session('email');
+        $id_siswa = DB::table('users')
+        ->where('email',$email)
+        ->pluck('id')
+        ->first();
+        $hapus=$hapus.',';
+        DB::table('kelasSiswa')
+        ->where('id_siswa', $id_siswa)
+        ->update(['kelas' => DB::raw("REPLACE(kelas, '$hapus', '')")]);
+
 
         return redirect('/home')->with('success');
     }
