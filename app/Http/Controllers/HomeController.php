@@ -36,6 +36,10 @@ class HomeController extends Controller
         ->where('email',$email)
         ->pluck('id')
         ->first();
+        $password = DB::table('users')
+        ->where('email',$email)
+        ->pluck('password')
+        ->first();
         $kelasSiswa = DB::table('kelasSiswa')
         ->where('id_siswa',$id)
         ->select('kelas')
@@ -60,7 +64,8 @@ class HomeController extends Controller
             'title' => 'Home',
             'active' => 'home',
             'kelasku' => $kelasku,
-            'kelaskuHariIni' => $kelaskuHariIni
+            'kelaskuHariIni' => $kelaskuHariIni,
+            'password' => $password
         ]);
     }
 
