@@ -15,6 +15,17 @@
             <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                <div class="modal-dialog">
                <div class="modal-content">
+                  <div class="mt-4">
+                     @if ($errors->any())
+                         <div class="alert alert-danger">
+                             <ul>
+                             @foreach ($errors->all() as $error)
+                                 <li>{{ $error }}</li>
+                             @endforeach
+                             </ul>
+                         </div>
+                     @endif
+                 </div>
                   <form class="row g-3 mt-3" method="GET" action="/tambahKelasSiswa">
                   <div class="modal-header">
                      <h1 class="modal-title fs-5" id="exampleModalLabel">Tambah Kelas</h1>

@@ -94,13 +94,15 @@ class HomeController extends Controller
 
     public function tambahKelasSiswa(Request $request)
     {
+        $id_kelas = DB::table('kelas')->pluck('id')->toArray();
         $messages = [
             'required' => ':attribute wajib diisi ',
             'idkelas.required' => 'ID Kelas harus diisi!',
+            'idkelas.in' => 'ID Kelas tidak ditemukan',
         ];
 
         $this->validate($request, [
-            "idkelas" => ['required'],
+            "idkelas" => ['required',Rule::in($id_kelas)            ],
         ], $messages);
 
         $email=session('email');
