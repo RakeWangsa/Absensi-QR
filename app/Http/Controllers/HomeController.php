@@ -193,15 +193,6 @@ class HomeController extends Controller
     {
         $id = base64_decode($id);
         $rand = mt_rand(100000, 999999);
-        // $name = DB::table('users')
-        // ->where('email',$email)
-        // ->pluck('name')
-        // ->first();
-        // $kelas = DB::table('kelas')
-        // ->where('guru',$name)
-        // ->where('hari',$hari_ini2)
-        // ->select('*')
-        // ->get();
 
         return view('guru.absen', [
             'title' => 'Absensi',

@@ -39,10 +39,11 @@
 
 <div class="container">
     <div class="row d-flex justify-content-center align-items-center">
-        <div class="col-md-6">
+        <div class="col-md-8">
             <div class="card">
                 <div class="card-body text-center mt-4">
-                    <p class="mt-3">Scan QR Code dibawah untuk melakukan absen</p>
+                    <h3 class="mt-3">Scan QR Code dibawah untuk melakukan absen</h3>
+                    <p class="mt-3">Code ini berlaku 15 menit sejak di generate</p>
                     {!! QrCode::size(250)->generate($rand) !!}
                     <p class="mt-3">{{ $rand }}</p>
                 </div>
