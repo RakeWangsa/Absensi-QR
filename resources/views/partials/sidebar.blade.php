@@ -8,7 +8,7 @@
             @elseif (auth()->user()->role=="siswa")
                <a class="nav-link collapsed {{ ($active === "home") ? 'active' : '' }}" href="/home"> <i class="bi bi-grid"></i><span>Home</span> </a>
                <a class="nav-link collapsed {{ ($active === "daftar kelas") ? 'active' : '' }}" href="/daftarKelasSiswa"> <i class="bi bi-list-ul"></i><span>Daftar Kelas</span> </a>
-               <a class="nav-link collapsed {{ ($active === "riwayat absen") ? 'active' : '' }}" href="/scan"> <i class="bi bi-clock-history"></i><span>Riwayat Absen</span> </a>                 
+               <a class="nav-link collapsed {{ ($active === "riwayat absen") ? 'active' : '' }}" href="/riwayatAbsen"> <i class="bi bi-clock-history"></i><span>Riwayat Absen</span> </a>                 
             @elseif (auth()->user()->role=="guru")
                <a class="nav-link collapsed {{ ($active === "home") ? 'active' : '' }}" href="/home/guru"> <i class="bi bi-grid"></i><span>Home</span> </a>
                <a class="nav-link collapsed {{ ($active === "daftar kelas") ? 'active' : '' }}" href="/daftarKelas"> <i class="bi bi-list-ul"></i><span>Daftar Kelas</span> </a>  

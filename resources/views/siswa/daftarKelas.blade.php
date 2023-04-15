@@ -3,6 +3,17 @@
 @section('container')
 <div class="pagetitle mt-3">
    <div class="container">
+      <div class="mt-4">
+         @if ($errors->any())
+             <div class="alert alert-danger">
+                 <ul>
+                 @foreach ($errors->all() as $error)
+                     <li>{{ $error }}</li>
+                 @endforeach
+                 </ul>
+             </div>
+         @endif
+     </div>
       <div class="row align-items-center">
          <div class="col">
             <h1>Daftar Kelas</h1>
@@ -15,17 +26,7 @@
             <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                <div class="modal-dialog">
                <div class="modal-content">
-                  <div class="mt-4">
-                     @if ($errors->any())
-                         <div class="alert alert-danger">
-                             <ul>
-                             @foreach ($errors->all() as $error)
-                                 <li>{{ $error }}</li>
-                             @endforeach
-                             </ul>
-                         </div>
-                     @endif
-                 </div>
+                  
                   <form class="row g-3 mt-3" method="GET" action="/tambahKelasSiswa">
                   <div class="modal-header">
                      <h1 class="modal-title fs-5" id="exampleModalLabel">Tambah Kelas</h1>
@@ -33,7 +34,7 @@
                   </div>
                   <div class="modal-body">
                      
-                        <div class="col-md-12"> <label for="idkelas" class="form-label">Masukkan ID Kelas :</label> <input type="text" class="form-control" id="idkelas" name="idkelas" value=""></div>
+                        <div class="col-md-12"> <label for="idkelas" class="form-label">Masukkan ID Kelas :</label> <input type="text" class="form-control" id="idkelas" name="idkelas" value="" required></div>
                      
                   </div>
                   <div class="modal-footer">
