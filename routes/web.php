@@ -6,6 +6,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\ManagementController;
 use App\Http\Controllers\DaftarKelasController;
+use App\Http\Controllers\AbsensiController;
 use App\Http\Controllers\QrCodeController;
 
 /*
@@ -48,13 +49,14 @@ Route::group(['middleware' => ['auth', 'cekRole:siswa']], function() {
     route::get('/tambahKelasSiswa', [HomeController::class, 'tambahKelasSiswa'])->name('tambahKelasSiswa')->middleware('auth');
     route::get('/hapusKelasSiswa/{id}', [HomeController::class, 'hapusKelasSiswa'])->name('hapusKelasSiswa')->middleware('auth');
     route::get('/riwayatAbsen', [DaftarKelasController::class, 'riwayatAbsen'])->name('riwayatAbsen')->middleware('auth');
-    Route::get('/scan', [App\Http\Controllers\QrcodeController::class, 'index'])->name('scan')->middleware('auth');
+    Route::get('/scan/{id_kelas}', [App\Http\Controllers\QrcodeController::class, 'index'])->name('scan')->middleware('auth');
     Route::post('/post', [App\Http\Controllers\QrcodeController::class, 'post'])->name('post')->middleware('auth');
 });
 
 Route::group(['middleware' => ['auth', 'cekRole:guru']], function() {
     route::get('/home/guru', [HomeController::class, 'homeGuru'])->name('homeGuru')->middleware('auth');
     route::get('/home/absensi/{id}', [HomeController::class, 'absensi'])->name('absensi')->middleware('auth');
+    route::get('/generateQR/{id}', [AbsensiController::class, 'generateQR'])->name('generateQR')->middleware('auth');
     route::get('/daftarKelas', [DaftarKelasController::class, 'index'])->name('daftarKelas')->middleware('auth');
     route::get('/daftarSiswa/{id}', [DaftarKelasController::class, 'daftarSiswa'])->name('daftarSiswa')->middleware('auth');
     route::get('/tambahKelas', [DaftarKelasController::class, 'tambahKelas'])->name('tambahKelas')->middleware('auth');

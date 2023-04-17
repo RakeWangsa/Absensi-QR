@@ -19,6 +19,8 @@ return new class extends Migration
             $table->string('hari');
             $table->time('waktu');
             $table->string('guru');
+            $table->string('code_absen')->nullable();
+            $table->time('waktu_absen')->nullable();
         });
     }
 

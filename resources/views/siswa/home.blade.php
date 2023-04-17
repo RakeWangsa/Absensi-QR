@@ -72,7 +72,7 @@
                       <td class="text-center">{{ $item->pelajaran }}</td>
                       <td class="text-center">{{ $item->hari }}, {{ substr($item->waktu, 0, 5) }}</td>
                       <td class="text-center">
-                        <a class="btn btn-success" style="border-radius: 100px;" a href="/scan"><i class="bi bi-qr-code-scan text-white"></i></a>
+                        <a class="btn btn-success" style="border-radius: 100px;" a href="{{ route('scan', ['id_kelas' => base64_encode($item->id)]) }}"><i class="bi bi-qr-code-scan text-white"></i></a>
                      </td>
                    </tr>
                    @endforeach

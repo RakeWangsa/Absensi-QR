@@ -86,8 +86,8 @@ class HomeController extends Controller
         $kelasku = $kelas->get();
 
         return view('siswa.daftarKelas', [
-            'title' => 'Home',
-            'active' => 'home',
+            'title' => 'Daftar Kelas',
+            'active' => 'daftar kelas',
             'kelasku' => $kelasku,
         ]);
     }
@@ -194,12 +194,13 @@ class HomeController extends Controller
     public function absensi($id)
     {
         $id = base64_decode($id);
-        $rand = mt_rand(100000, 999999);
-
+        // $rand = mt_rand(100000, 999999);
+        //dd($id);
         return view('guru.absen', [
             'title' => 'Absensi',
             'active' => 'absensi',
-            'rand' => $rand,
+            'id' => $id,
+            // 'rand' => $rand,
 
         ]);
     }

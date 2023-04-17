@@ -42,10 +42,17 @@
         <div class="col-md-8">
             <div class="card">
                 <div class="card-body text-center mt-4">
-                    <h3 class="mt-3">Scan QR Code dibawah untuk melakukan absen</h3>
-                    <p class="mt-3">Code ini berlaku 15 menit sejak di generate</p>
-                    {!! QrCode::size(250)->generate($rand) !!}
-                    <p class="mt-3">{{ $rand }}</p>
+                  @if(isset($rand))
+                     <h3 class="mt-3">Scan QR Code dibawah untuk melakukan absen</h3>
+                     <p class="mt-3">Code ini berlaku 15 menit sejak di generate</p>
+                     {!! QrCode::size(250)->generate($rand) !!}
+                     <p class="mt-3">{{ $rand }}</p>
+                  @else
+                     <a type="button" class="btn btn-primary mb-4" a href="{{ route('generateQR', ['id' => base64_encode($id)]) }}">
+                        <i class="bi bi-qr-code-scan text-white me-2"></i><span>Generate QR Code</span>
+                     </a>
+                  @endif
+                  
                 </div>
             </div>
         </div>
