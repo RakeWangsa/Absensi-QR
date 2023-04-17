@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\DB;
 use App\Models\Kelas;
+use App\Models\Absensi;
 
 class AbsensiController extends Controller
 {
@@ -22,6 +23,45 @@ class AbsensiController extends Controller
         ]);
 
         return redirect('/home/absensi/'.$id)->with('rand', $rand);
+        
+    }
+
+    public function submitAbsen(Request $request, $id_kelas)
+    {
+        $id_kelas = base64_decode($id_kelas);
+        // $messages = [
+        //     'required' => ':attribute wajib diisi ',
+        //     'idkelas.required' => 'ID Kelas harus diisi!',
+        //     'idkelas.in' => 'ID Kelas tidak ditemukan',
+        // ];
+
+        // $this->validate($request, [
+        //     "idkelas" => ['required',Rule::in($id_kelas)            ],
+        // ], $messages);
+
+        $email=session('email');
+        $name = DB::table('users')
+        ->where('email',$email)
+        ->pluck('name')
+        ->first();
+        $id_siswa = DB::table('users')
+        ->where('email',$email)
+        ->pluck('id')
+        ->first();
+
+        if($request->scan=='999'){
+            Absensi::insert([
+                'id_siswa' => $id_siswa,
+                'nama' => $name,
+                'id_kelas' => $id_kelas,
+                'status' => 'hadir'
+            ]);
+            return redirect('/home')->with('success', 'Berhasil melakukan absensi');
+        }
+
+        
+        
+
         
     }
 }

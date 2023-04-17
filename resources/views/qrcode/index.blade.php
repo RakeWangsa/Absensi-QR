@@ -26,10 +26,10 @@
              <div class="table-container border">
                 <div id="qr-reader" style="width: 70%" class="mt-4"></div>
 
-                <form id="myForm">
+                <form class="row g-3 mt-3" method="GET" action="{{route('submitAbsen', ['id_kelas' => base64_encode($id_kelas)])}}">
                     <div class="mb-3 mt-3">
                         <label for="result-input" class="form-label">Scan QR Code atau ketikkan code</label>
-                        <input type="text" class="form-control" id="result-input" placeholder="Hasil scan akan muncul di sini">
+                        <input type="text" class="form-control" id="result-input" name="scan" placeholder="Hasil scan akan muncul di sini">
                     </div>
                     <button type="submit" class="btn btn-primary">Submit</button>
                 </form>
@@ -58,10 +58,10 @@
         // memperbarui nilai value dari input
         $('#result-input').val(scannerResult);
 
-        if (scannerResult === "999") {
-            // mengirimkan formulir secara otomatis jika input adalah "999"
-            $('#myForm').submit();
-        }
+        // if (scannerResult === "999") {
+        //     // mengirimkan formulir secara otomatis jika input adalah "999"
+        //     $('#myForm').submit();
+        // }
 
         // melakukan AJAX request jika diperlukan
         $.ajax({
