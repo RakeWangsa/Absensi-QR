@@ -194,12 +194,24 @@ class HomeController extends Controller
     public function absensi($id)
     {
         $id = base64_decode($id);
-        // $rand = mt_rand(100000, 999999);
-        //dd($id);
+        $skrg = Carbon::now()->addHours(7)->subMinutes(15);
+        $kelas = DB::table('kelas')
+        ->where('waktu_absen', '>', $skrg)
+        ->where('id',$id)
+        ->select('*')
+        ->get();
+        $expired=NULL;
+        if(count($kelas)>0){
+            $expired = date('H:i:s', strtotime($kelas[0]->waktu_absen . ' + 15 minutes'));
+        }
+        
+
         return view('guru.absen', [
             'title' => 'Absensi',
             'active' => 'absensi',
             'id' => $id,
+            'kelas' => $kelas,
+            'expired' => $expired,
             // 'rand' => $rand,
 
         ]);

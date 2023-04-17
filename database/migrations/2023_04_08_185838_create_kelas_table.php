@@ -20,7 +20,7 @@ return new class extends Migration
             $table->time('waktu');
             $table->string('guru');
             $table->string('code_absen')->nullable();
-            $table->time('waktu_absen')->nullable();
+            $table->datetime('waktu_absen')->nullable();
         });
     }
 
