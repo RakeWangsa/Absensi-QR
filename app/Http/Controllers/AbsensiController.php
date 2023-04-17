@@ -59,10 +59,27 @@ class AbsensiController extends Controller
         }else{
             return redirect('/scan/'.$id_kelas)->with('success', 'Absensi gagal, silahkan coba lagi!');
         }
+    }
 
-        
-        
-
-        
+    public function riwayatAbsen()
+    {
+        $email=session('email');
+        $id_siswa = DB::table('users')
+        ->where('email',$email)
+        ->pluck('id')
+        ->first();
+        $absensi = DB::table('absensi')
+        ->where('id_siswa',$id_siswa)
+        ->select('*')
+        ->get();
+        $kelas = DB::table('kelas')
+        ->select('*')
+        ->get();
+        return view('siswa.riwayatAbsen', [
+            'title' => 'Riwayat Absen',
+            'active' => 'riwayat absen',
+            'absensi' => $absensi,
+            'kelas' => $kelas,
+        ]);
     }
 }

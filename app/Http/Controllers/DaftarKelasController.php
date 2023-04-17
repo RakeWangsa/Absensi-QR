@@ -144,21 +144,4 @@ class DaftarKelasController extends Controller
 
         return redirect('/daftarKelas')->with('success');
     }
-
-    public function riwayatAbsen()
-    {
-        $email=session('email');
-        $name = DB::table('users')
-        ->where('email',$email)
-        ->pluck('name')
-        ->first();
-        $id_siswa = DB::table('users')
-        ->where('email',$email)
-        ->pluck('id')
-        ->first();
-        return view('siswa.riwayatAbsen', [
-            'title' => 'Riwayat Absen',
-            'active' => 'riwayat absen',
-        ]);
-    }
 }

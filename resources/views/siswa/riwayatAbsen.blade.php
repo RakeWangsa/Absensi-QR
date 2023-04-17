@@ -44,45 +44,42 @@
 
 
       <div class="card col-md-12 mt-2 pb-4">
-         <div class="card-body">
-             <h5 class="card-title">Riwayat Absen Anda</h5>
+         <div class="card-body mt-4">
              <div class="table-container border">
-             {{-- <table>
-                <thead>
-                   <tr>
-                    <th scope="col" class="text-center">No</th>
-                    <th scope="col" class="text-center">ID Kelas</th>
-                    <th scope="col" class="text-center">Pengajar</th>
-                    <th scope="col" class="text-center">Ruang</th>
-                    <th scope="col" class="text-center">Pelajaran</th>
-                    <th scope="col" class="text-center">Waktu</th>
-                    <th scope="col" class="text-center">Action</th>
-                   </tr>
-                </thead>
+               <table>
+                  <thead>
+                    <tr>
+                      <th scope="col" class="text-center">No</th>
+                      <th scope="col" class="text-center">ID Kelas</th>
+                      <th scope="col" class="text-center">Pelajaran</th>
+                      <th scope="col" class="text-center">Pengajar</th>
+                      <th scope="col" class="text-center">Status</th>
+                      <th scope="col" class="text-center">Waktu</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    @php($no=1)
+                    @if(count($absensi) > 0)
+                      @foreach($absensi as $item)
+                        @php($kelas = \App\Models\Kelas::where('id', $item->id_kelas)->first())
+                        <tr>
+                          <td scope="row" class="text-center">{{ $no++ }}</td>
+                          <td class="text-center">{{ $item->id }}</td>
+                          <td class="text-center">{{ $kelas->pelajaran }}</td>
+                          <td class="text-center">{{ $kelas->guru }}</td>
+                          <td class="text-center">{{ $item->status }}</td>
+                          <td class="text-center">{{ $item->waktu }}</td>
+                        </tr>
+                      @endforeach
+                    @else
+                      <tr>
+                        <td colspan="6" class="text-center">Tidak ada absensi</td>
+                      </tr>
+                    @endif
+                  </tbody>
+                </table>
                 
-                <tbody>
-                  @php($no=1)
-                  @if(count($kelaskuHariIni) > 0)
-                  @foreach($kelaskuHariIni as $item)
-                   <tr>
-                      <td scope="row" class="text-center">{{ $no++ }}</td>
-                      <td class="text-center">{{ $item->id }}</td>
-                      <td class="text-center">{{ $item->guru }}</td>
-                      <td class="text-center">{{ $item->ruang }}</td>
-                      <td class="text-center">{{ $item->pelajaran }}</td>
-                      <td class="text-center">{{ $item->hari }}, {{ substr($item->waktu, 0, 5) }}</td>
-                      <td class="text-center">
-                        <a class="btn btn-success" style="border-radius: 100px;" a href="/scan"><i class="bi bi-qr-code-scan text-white"></i></a>
-                     </td>
-                   </tr>
-                   @endforeach
-                   @else
-                   <tr>
-                     <td colspan="6" class="text-center">Tidak ada kelas</td>
-                   </tr>
-                   @endif
-                </tbody>
-             </table> --}}
+                
             </div>
          </div>
       </div>
