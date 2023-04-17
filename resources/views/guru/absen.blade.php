@@ -68,32 +68,30 @@
          <div class="card-body">
              <h5 class="card-title">Daftar Hadir Siswa</h5>
              <div class="table-container border">
-             {{-- <table>
+             <table>
                 <thead>
                    <tr>
                     <th scope="col" class="text-center">No</th>
-                    <th scope="col" class="text-center">ID Kelas</th>
-                    <th scope="col" class="text-center">Pengajar</th>
-                    <th scope="col" class="text-center">Ruang</th>
-                    <th scope="col" class="text-center">Pelajaran</th>
-                    <th scope="col" class="text-center">Waktu</th>
+                    <th scope="col" class="text-center">ID Siswa</th>
+                    <th scope="col" class="text-center">Nama</th>
+                    <th scope="col" class="text-center">Status</th>
                     <th scope="col" class="text-center">Action</th>
                    </tr>
                 </thead>
                 
                 <tbody>
                   @php($no=1)
-                  @if(count($kelas) > 0)
-                  @foreach($kelas as $item)
+                  @if(count($siswa) > 0)
+                  @foreach($siswa as $item)
                    <tr>
                       <td scope="row" class="text-center">{{ $no++ }}</td>
-                      <td class="text-center">{{ $item->id }}</td>
-                      <td class="text-center">{{ $item->guru }}</td>
-                      <td class="text-center">{{ $item->ruang }}</td>
-                      <td class="text-center">{{ $item->pelajaran }}</td>
-                      <td class="text-center">{{ $item->hari }}, {{ substr($item->waktu, 0, 5) }}</td>
+                      <td class="text-center">{{ $item->id_siswa }}</td>
+                      <td class="text-center">{{ $item->nama }}</td>
+                      <td class="text-center"></td>
                       <td class="text-center">
-                        <a class="btn btn-success" style="border-radius: 100px;" a href="{{ route('editKelas', ['id' => base64_encode($item->id)]) }}"><i class="bi bi-qr-code-scan text-white"></i></a>
+                        <a class="btn btn-primary" style="border-radius: 100px;" a href="{{ route('editKelas', ['id' => base64_encode($item->id)]) }}"><i class="bi bi-check-circle"></i></a>
+                        <a class="btn btn-warning" style="border-radius: 100px;" a href="{{ route('editKelas', ['id' => base64_encode($item->id)]) }}"><i class="bi bi-exclamation-circle"></i></a>
+                        <a class="btn btn-danger" style="border-radius: 100px;" a href="{{ route('editKelas', ['id' => base64_encode($item->id)]) }}"><i class="bi bi-x-circle"></i></a>
                      </td>
                    </tr>
                    @endforeach
@@ -103,7 +101,7 @@
                    </tr>
                    @endif
                 </tbody>
-             </table> --}}
+             </table>
             </div>
          </div>
       </div>

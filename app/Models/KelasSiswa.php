@@ -9,7 +9,7 @@ class KelasSiswa extends Model
 {
     use HasFactory;
     protected $table = 'kelasSiswa';
-    protected $fillable = ['id', 'nama', 'kelas'];
+    protected $fillable = ['id', 'id_siswa', 'nama', 'kelas'];
     // 'kelas1', 'kelas2', 'kelas3', 'kelas4', 'kelas5', 'kelas6', 'kelas7', 'kelas8', 'kelas9', 'kelas10',
     // 'kelas11', 'kelas12', 'kelas13', 'kelas14', 'kelas15', 'kelas16', 'kelas17', 'kelas18', 'kelas19', 'kelas20',
     // 'kelas21', 'kelas22', 'kelas23', 'kelas24', 'kelas25', 'kelas26', 'kelas27', 'kelas28', 'kelas29', 'kelas30',

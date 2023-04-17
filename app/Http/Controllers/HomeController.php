@@ -204,7 +204,10 @@ class HomeController extends Controller
         if(count($kelas)>0){
             $expired = date('H:i:s', strtotime($kelas[0]->waktu_absen . ' + 15 minutes'));
         }
-        
+        $siswa = DB::table('kelasSiswa')
+            ->where('kelas', 'like', '%' . $id . '%')
+            ->select('*')
+            ->get();
 
         return view('guru.absen', [
             'title' => 'Absensi',
@@ -212,6 +215,7 @@ class HomeController extends Controller
             'id' => $id,
             'kelas' => $kelas,
             'expired' => $expired,
+            'siswa' => $siswa,
             // 'rand' => $rand,
 
         ]);
