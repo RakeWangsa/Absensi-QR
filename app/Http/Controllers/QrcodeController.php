@@ -8,7 +8,10 @@ class QrcodeController extends Controller
 {
     public function index()
     {
-        return view('qrcode.index');
+        return view('qrcode.index',[
+            'title' => 'Absensi',
+            'active' => 'absensi',
+        ]);
     }
 
     public function post(Request $request)
