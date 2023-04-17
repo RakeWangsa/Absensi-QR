@@ -194,9 +194,9 @@ class HomeController extends Controller
     public function absensi($id)
     {
         $id = base64_decode($id);
-        $skrg = Carbon::now()->addHours(7)->subMinutes(15);
+        $skrgmin15 = Carbon::now()->addHours(7)->subMinutes(15);
         $kelas = DB::table('kelas')
-        ->where('waktu_absen', '>', $skrg)
+        ->where('waktu_absen', '>', $skrgmin15)
         ->where('id',$id)
         ->select('*')
         ->get();

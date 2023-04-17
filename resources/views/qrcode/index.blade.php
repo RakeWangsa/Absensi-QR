@@ -14,13 +14,13 @@
    </div>
 </div>
 
-
+@if(session('success'))
+    <div class="alert alert-danger">
+        {{ session('success') }}
+    </div>
+@endif
 
 <div class="row">
-
-   
-
-
       <div class="card col-md-12 mt-2 pb-4">
          <div class="card-body">
              <div class="table-container border">

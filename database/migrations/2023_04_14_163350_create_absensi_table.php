@@ -17,6 +17,7 @@ return new class extends Migration
             $table->string('id_siswa');
             $table->string('nama');
             $table->string('id_kelas');
+            $table->datetime('waktu');
             $table->string('status');
         });
     }

@@ -28,17 +28,9 @@ class AbsensiController extends Controller
 
     public function submitAbsen(Request $request, $id_kelas)
     {
-        $id_kelas = base64_decode($id_kelas);
-        // $messages = [
-        //     'required' => ':attribute wajib diisi ',
-        //     'idkelas.required' => 'ID Kelas harus diisi!',
-        //     'idkelas.in' => 'ID Kelas tidak ditemukan',
-        // ];
-
-        // $this->validate($request, [
-        //     "idkelas" => ['required',Rule::in($id_kelas)            ],
-        // ], $messages);
-
+        $idkelas = base64_decode($id_kelas);
+        $skrg = Carbon::now()->addHours(7);
+        $skrgmin15 = Carbon::now()->addHours(7)->subMinutes(15);
         $email=session('email');
         $name = DB::table('users')
         ->where('email',$email)
@@ -49,14 +41,23 @@ class AbsensiController extends Controller
         ->pluck('id')
         ->first();
 
-        if($request->scan=='999'){
+        $code_absen=DB::table('kelas')
+        ->where('id',$idkelas)
+        ->where('waktu_absen', '>', $skrgmin15)
+        ->pluck('code_absen')
+        ->first();
+
+        if($request->scan==$code_absen){
             Absensi::insert([
                 'id_siswa' => $id_siswa,
                 'nama' => $name,
-                'id_kelas' => $id_kelas,
+                'id_kelas' => $idkelas,
+                'waktu' => $skrg,
                 'status' => 'hadir'
             ]);
             return redirect('/home')->with('success', 'Berhasil melakukan absensi');
+        }else{
+            return redirect('/scan/'.$id_kelas)->with('success', 'Absensi gagal, silahkan coba lagi!');
         }
 
         
