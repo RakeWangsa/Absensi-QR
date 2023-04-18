@@ -51,8 +51,11 @@
                 <thead>
                    <tr>
                     <th scope="col" class="text-center">No</th>
+                    <th scope="col" class="text-center">ID Siswa</th>
                     <th scope="col" class="text-center">Nama</th>
-                    <th scope="col" class="text-center">Action</th>
+                    <th scope="col" class="text-center">Jumlah Hadir</th>
+                    <th scope="col" class="text-center">Jumlah Izin</th>
+                    <th scope="col" class="text-center">Jumlah Tidak Hadir</th>
                    </tr>
                 </thead>
                 
@@ -60,12 +63,14 @@
                   @php($no=1)
                   @if(count($siswa) > 0)
                   @foreach($siswa as $item)
+                  @php($absensi = \App\Models\Absensi::where('id_siswa', $item->id_siswa)->get())
                    <tr>
                       <td scope="row" class="text-center">{{ $no++ }}</td>
+                      <td class="text-center">{{ $item->id_siswa }}</td>
                       <td class="text-center">{{ $item->nama }}</td>
-                      <td class="text-center">
-                        <a class="btn btn-success" style="border-radius: 100px;" a href="{{ route('editKelas', ['id' => base64_encode($item->id)]) }}"><i class="bi bi-qr-code-scan text-white"></i></a>
-                     </td>
+                      <td class="text-center">{{ $absensi->where('status', 'Hadir')->count() }}</td>
+                      <td class="text-center">{{ $absensi->where('status', 'Izin')->count() }}</td>
+                      <td class="text-center">{{ $absensi->where('status', 'Tidak Hadir')->count() }}</td>
                    </tr>
                    @endforeach
                    @else

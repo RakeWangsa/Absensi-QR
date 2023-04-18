@@ -7,6 +7,7 @@ use App\Models\User;
 use App\Models\Kelas;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Validation\Rule;
+use Illuminate\Support\Carbon;
 
 class DaftarKelasController extends Controller
 {
@@ -34,18 +35,22 @@ class DaftarKelasController extends Controller
 
     public function daftarSiswa($id)
     {
-
         $id = base64_decode($id);
         $siswa = DB::table('kelasSiswa')
             ->where('kelas', 'like', '%' . $id . '%')
             ->select('*')
             ->get();
-        
+        // $absensi = DB::table('absensi')
+        //     ->where('id_kelas',$id)
+        //     ->select('*')
+        //     ->get();
+
         return view('guru.daftarSiswa', [
             'title' => 'Daftar Siswa',
             'active' => 'daftar siswa',
             'siswa' => $siswa,
-            'id' => $id
+            'id' => $id,
+            // 'absensi' => $absensi,
         ]);
     }
 

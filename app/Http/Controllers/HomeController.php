@@ -155,7 +155,7 @@ class HomeController extends Controller
 
         return redirect('/daftarKelasSiswa')->with('success');
     }
-    
+
     public function homeGuru()
     {
         $email=session('email');
@@ -218,6 +218,23 @@ class HomeController extends Controller
             ->select('*')
             ->get();
 
+        $hadir = DB::table('absensi')
+            ->where('id_kelas',$id)
+            ->where('status','Hadir')
+            ->where('waktu', '>', $hariIni)
+            ->select('*')
+            ->get();
+        $izin = DB::table('absensi')
+            ->where('id_kelas',$id)
+            ->where('status','Izin')
+            ->where('waktu', '>', $hariIni)
+            ->select('*')
+            ->get();
+        $jumlahSiswa = count($siswa);
+        $jumlahHadir = count($hadir);
+        $jumlahIzin = count($izin);
+        $jumlahTidakHadir = $jumlahSiswa-$jumlahHadir-$jumlahIzin;
+
         return view('guru.absen', [
             'title' => 'Absensi',
             'active' => 'home',
@@ -226,6 +243,10 @@ class HomeController extends Controller
             'expired' => $expired,
             'siswa' => $siswa,
             'absensi' => $absensi,
+            'jumlahSiswa' => $jumlahSiswa,
+            'jumlahHadir' => $jumlahHadir,
+            'jumlahIzin' => $jumlahIzin,
+            'jumlahTidakHadir' => $jumlahTidakHadir,
         ]);
     }
 

@@ -71,7 +71,6 @@ Route::group(['middleware' => ['auth', 'cekRole:guru']], function() {
 });
 
 Route::group(['middleware' => ['auth', 'cekRole:admin']], function() {
-    route::get('/home/admin', [HomeController::class, 'homeAdmin'])->name('homeAdmin')->middleware('auth');
     Route::get('/managementUser', [ManagementController::class, 'index'])->name('managementUser')->middleware('auth');
     Route::get('/registerGuru', [ManagementController::class, 'tambah'])->name('registerGuru')->middleware('auth');
     Route::post('/registerGuru', [ManagementController::class, 'store'])->middleware('auth')->middleware('auth');
