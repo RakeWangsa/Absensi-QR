@@ -10,7 +10,7 @@ class QrcodeController extends Controller
 {
     public function index($id_kelas)
     {
-        $hariIni = Carbon::now()->addHours(7)->subHours(24);
+        $hariIni = Carbon::now()->addHours(7)->startOfDay();
         $email=session('email');
         $id_kelas = base64_decode($id_kelas);
         $id_siswa = DB::table('users')

@@ -15,7 +15,7 @@ class AbsensiController extends Controller
         $id_kelas = base64_decode($id);
         $rand = mt_rand(100000, 999999);
         $skrg = Carbon::now()->addHours(7);
-        $hariIni = Carbon::now()->addHours(7)->subHours(24);
+        $hariIni = Carbon::now()->addHours(7)->startOfDay();
         $cek = DB::table('kelas')
         ->where('id',$id_kelas)
         ->pluck('waktu_absen')
@@ -111,7 +111,7 @@ class AbsensiController extends Controller
         $id_siswa = base64_decode($id_siswa);
         $idkelas = base64_decode($id_kelas);
         $skrg = Carbon::now()->addHours(7);
-        $hariIni = Carbon::now()->addHours(7)->subHours(24);
+        $hariIni = Carbon::now()->addHours(7)->startOfDay();
         $name = DB::table('users')
         ->where('id',$id_siswa)
         ->pluck('name')
@@ -152,7 +152,7 @@ class AbsensiController extends Controller
         $id_siswa = base64_decode($id_siswa);
         $idkelas = base64_decode($id_kelas);
         $skrg = Carbon::now()->addHours(7);
-        $hariIni = Carbon::now()->addHours(7)->subHours(24);
+        $hariIni = Carbon::now()->addHours(7)->startOfDay();
         $name = DB::table('users')
         ->where('id',$id_siswa)
         ->pluck('name')
@@ -191,7 +191,7 @@ class AbsensiController extends Controller
         $id_siswa = base64_decode($id_siswa);
         $idkelas = base64_decode($id_kelas);
         $skrg = Carbon::now()->addHours(7);
-        $hariIni = Carbon::now()->addHours(7)->subHours(24);
+        $hariIni = Carbon::now()->addHours(7)->startOfDay();
         $name = DB::table('users')
         ->where('id',$id_siswa)
         ->pluck('name')

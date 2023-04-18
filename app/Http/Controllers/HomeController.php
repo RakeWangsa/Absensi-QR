@@ -198,7 +198,7 @@ class HomeController extends Controller
     {
         $id = base64_decode($id);
         $skrgmin15 = Carbon::now()->addHours(7)->subMinutes(15);
-        $hariIni = Carbon::now()->addHours(7)->subHours(24);
+        $hariIni = Carbon::now()->addHours(7)->startOfDay();
         $kelas = DB::table('kelas')
         ->where('waktu_absen', '>', $skrgmin15)
         ->where('id',$id)

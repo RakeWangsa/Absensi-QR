@@ -5,7 +5,7 @@
    <div class="container">
       <div class="row align-items-center">
          <div class="col">
-            <h1>Daftar Siswa</h1>
+            <h1>Rekap Absen</h1>
          </div>
       </div>
    </div>
@@ -45,7 +45,7 @@
 
       <div class="card col-md-12 mt-2 pb-4">
          <div class="card-body">
-             <h5 class="card-title">Daftar Siswa (ID Kelas : {{ $id }})</h5>
+             <h5 class="card-title">ID Kelas : {{ $id }}</h5>
              <div class="table-container border">
              <table>
                 <thead>
