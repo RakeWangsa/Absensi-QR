@@ -63,7 +63,7 @@
                   @php($no=1)
                   @if(count($siswa) > 0)
                   @foreach($siswa as $item)
-                  @php($absensi = \App\Models\Absensi::where('id_siswa', $item->id_siswa)->get())
+                  @php($absensi = \App\Models\Absensi::where('id_siswa', $item->id_siswa)->where('id_kelas', $id)->get())
                    <tr>
                       <td scope="row" class="text-center">{{ $no++ }}</td>
                       <td class="text-center">{{ $item->id_siswa }}</td>

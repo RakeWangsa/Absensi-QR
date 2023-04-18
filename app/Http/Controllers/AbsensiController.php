@@ -12,11 +12,34 @@ class AbsensiController extends Controller
 {
     public function generateQR($id)
     {
-        $idkelas = base64_decode($id);
+        $id_kelas = base64_decode($id);
         $rand = mt_rand(100000, 999999);
         $skrg = Carbon::now()->addHours(7);
-        //dd($idkelas);
-        Kelas::where('id', $idkelas)
+        $hariIni = Carbon::now()->addHours(7)->subHours(24);
+        $cek = DB::table('kelas')
+        ->where('id',$id_kelas)
+        ->pluck('waktu_absen')
+        ->first();
+        if($cek<$hariIni){
+            $siswa = DB::table('kelasSiswa')
+            ->where('kelas', 'like', '%' . $id_kelas . '%')
+            ->select('*')
+            ->get();
+
+            foreach ($siswa as $data) {
+                $id_siswa = $data->id_siswa;
+                $nama = $data->nama;
+
+                Absensi::insert([
+                    'id_siswa' => $id_siswa,
+                    'nama' => $nama,
+                    'id_kelas' => $id_kelas,
+                    'waktu' => $skrg,
+                    'status' => 'Tidak Hadir'
+                ]);
+            }
+        }
+        Kelas::where('id', $id_kelas)
             ->update([
                 'code_absen' => $rand,
                 'waktu_absen' => $skrg
@@ -163,10 +186,43 @@ class AbsensiController extends Controller
         return redirect('/home/absensi/'.$id_kelas)->with('success');
     }
 
-    public function setTidakHadir($id_kelas,$id)
+    public function setTidakHadir($id_kelas,$id_siswa)
     {
-        $id = base64_decode($id);
-        Absensi::where('id', $id)->delete();
+        $id_siswa = base64_decode($id_siswa);
+        $idkelas = base64_decode($id_kelas);
+        $skrg = Carbon::now()->addHours(7);
+        $hariIni = Carbon::now()->addHours(7)->subHours(24);
+        $name = DB::table('users')
+        ->where('id',$id_siswa)
+        ->pluck('name')
+        ->first();
+        $cek = DB::table('absensi')
+        ->where('id_siswa',$id_siswa)
+        ->where('waktu', '>', $hariIni)
+        ->pluck('status')
+        ->first();
+
+        if(isset($cek)){
+            $rowToUpdate = Absensi::where('id_siswa', $id_siswa)
+                ->where('id_kelas', $idkelas)
+                ->orderBy('id', 'desc')
+                ->first();
+                if($rowToUpdate){
+                    $rowToUpdate->update([
+                        'status' => 'Tidak Hadir',
+                        'waktu' => $skrg,
+                    ]);
+                }
+        }else{
+            Absensi::insert([
+                'id_siswa' => $id_siswa,
+                'nama' => $name,
+                'id_kelas' => $idkelas,
+                'status' => 'Tidak Hadir',
+                'waktu' => $skrg,
+            ]);
+        }
         return redirect('/home/absensi/'.$id_kelas)->with('success');
     }
+
 }

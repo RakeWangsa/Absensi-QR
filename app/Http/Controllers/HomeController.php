@@ -103,7 +103,7 @@ class HomeController extends Controller
         ];
 
         $this->validate($request, [
-            "idkelas" => ['required',Rule::in($id_kelas)            ],
+            "idkelas" => ['required',Rule::in($id_kelas)],
         ], $messages);
 
         $email=session('email');

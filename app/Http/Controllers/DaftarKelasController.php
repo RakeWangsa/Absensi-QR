@@ -40,17 +40,12 @@ class DaftarKelasController extends Controller
             ->where('kelas', 'like', '%' . $id . '%')
             ->select('*')
             ->get();
-        // $absensi = DB::table('absensi')
-        //     ->where('id_kelas',$id)
-        //     ->select('*')
-        //     ->get();
 
         return view('guru.daftarSiswa', [
             'title' => 'Daftar Siswa',
             'active' => 'daftar siswa',
             'siswa' => $siswa,
             'id' => $id,
-            // 'absensi' => $absensi,
         ]);
     }
 
