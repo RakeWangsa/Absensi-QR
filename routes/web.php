@@ -66,8 +66,8 @@ Route::group(['middleware' => ['auth', 'cekRole:guru']], function() {
     Route::get('/updateKelas/{id}', [DaftarKelasController::class, 'updateKelas'])->name('updateKelas')->middleware('auth');
     Route::get('/hapusKelas/{id}', [DaftarKelasController::class, 'hapusKelas'])->name('hapusKelas')->middleware('auth');
     Route::get('/setHadir/{id_kelas}/{id_siswa}', [AbsensiController::class, 'setHadir'])->name('setHadir')->middleware('auth');
-    Route::get('/setIzin{id}', [AbsensiController::class, 'setIzin'])->name('setIzin')->middleware('auth');
-    
+    Route::get('/setIzin/{id_kelas}/{id_siswa}', [AbsensiController::class, 'setIzin'])->name('setIzin')->middleware('auth');
+    Route::get('/setTidakHadir/{id_kelas}/{id}', [AbsensiController::class, 'setTidakHadir'])->name('setTidakHadir')->middleware('auth');
 });
 
 Route::group(['middleware' => ['auth', 'cekRole:admin']], function() {

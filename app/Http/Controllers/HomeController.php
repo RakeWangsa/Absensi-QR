@@ -155,6 +155,7 @@ class HomeController extends Controller
 
         return redirect('/daftarKelasSiswa')->with('success');
     }
+    
     public function homeGuru()
     {
         $email=session('email');

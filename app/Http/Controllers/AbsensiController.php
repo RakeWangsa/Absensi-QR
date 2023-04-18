@@ -98,7 +98,7 @@ class AbsensiController extends Controller
         ->where('waktu', '>', $hariIni)
         ->pluck('status')
         ->first();
-        //dd($idkelas,$id_siswa);
+
         if(isset($cek)){
             $rowToUpdate = Absensi::where('id_siswa', $id_siswa)
                 ->where('id_kelas', $idkelas)
@@ -122,6 +122,51 @@ class AbsensiController extends Controller
 
                 
 
+        return redirect('/home/absensi/'.$id_kelas)->with('success');
+    }
+    public function setIzin($id_kelas,$id_siswa)
+    {
+        $id_siswa = base64_decode($id_siswa);
+        $idkelas = base64_decode($id_kelas);
+        $skrg = Carbon::now()->addHours(7);
+        $hariIni = Carbon::now()->addHours(7)->subHours(24);
+        $name = DB::table('users')
+        ->where('id',$id_siswa)
+        ->pluck('name')
+        ->first();
+        $cek = DB::table('absensi')
+        ->where('id_siswa',$id_siswa)
+        ->where('waktu', '>', $hariIni)
+        ->pluck('status')
+        ->first();
+
+        if(isset($cek)){
+            $rowToUpdate = Absensi::where('id_siswa', $id_siswa)
+                ->where('id_kelas', $idkelas)
+                ->orderBy('id', 'desc')
+                ->first();
+                if($rowToUpdate){
+                    $rowToUpdate->update([
+                        'status' => 'Izin',
+                        'waktu' => $skrg,
+                    ]);
+                }
+        }else{
+            Absensi::insert([
+                'id_siswa' => $id_siswa,
+                'nama' => $name,
+                'id_kelas' => $idkelas,
+                'status' => 'Izin',
+                'waktu' => $skrg,
+            ]);
+        }
+        return redirect('/home/absensi/'.$id_kelas)->with('success');
+    }
+
+    public function setTidakHadir($id_kelas,$id)
+    {
+        $id = base64_decode($id);
+        Absensi::where('id', $id)->delete();
         return redirect('/home/absensi/'.$id_kelas)->with('success');
     }
 }
