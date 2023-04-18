@@ -122,7 +122,7 @@
 </div>
 <script>
 function confirmDelete() {
-    var confirmation = prompt("Untuk menghapus data, ketik 'Konfirmasi':");
+    var confirmation = prompt("Peringatan!!\nJika kelas dihapus maka seluruh riwayat absen\npada kelas ini akan dihapus juga\nUntuk melanjutkan, ketik 'Konfirmasi':");
     if (confirmation === "konfirmasi" || confirmation === "Konfirmasi") {
         return true;
     } else {

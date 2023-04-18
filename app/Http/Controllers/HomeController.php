@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\DB;
 use App\Models\Kelas;
+use App\Models\Absensi;
 use App\Models\KelasSiswa;
 use Illuminate\Validation\Rule;
 
@@ -139,17 +140,18 @@ class HomeController extends Controller
 
     public function hapusKelasSiswa($id)
     {
-        $hapus = base64_decode($id);
+        $id_kelas = base64_decode($id);
         $email=session('email');
         $id_siswa = DB::table('users')
         ->where('email',$email)
         ->pluck('id')
         ->first();
-        $hapus=$hapus.',';
+        $hapus=$id_kelas.',';
         DB::table('kelasSiswa')
         ->where('id_siswa', $id_siswa)
         ->update(['kelas' => DB::raw("REPLACE(kelas, '$hapus', '')")]);
 
+        Absensi::where('id_siswa', $id_siswa)->where('id_kelas', $id_kelas)->delete();
 
         return redirect('/daftarKelasSiswa')->with('success');
     }
@@ -195,6 +197,7 @@ class HomeController extends Controller
     {
         $id = base64_decode($id);
         $skrgmin15 = Carbon::now()->addHours(7)->subMinutes(15);
+        $hariIni = Carbon::now()->addHours(7)->subHours(24);
         $kelas = DB::table('kelas')
         ->where('waktu_absen', '>', $skrgmin15)
         ->where('id',$id)
@@ -208,16 +211,20 @@ class HomeController extends Controller
             ->where('kelas', 'like', '%' . $id . '%')
             ->select('*')
             ->get();
+        $absensi = DB::table('absensi')
+            ->where('id_kelas',$id)
+            ->where('waktu', '>', $hariIni)
+            ->select('*')
+            ->get();
 
         return view('guru.absen', [
             'title' => 'Absensi',
-            'active' => 'absensi',
+            'active' => 'home',
             'id' => $id,
             'kelas' => $kelas,
             'expired' => $expired,
             'siswa' => $siswa,
-            // 'rand' => $rand,
-
+            'absensi' => $absensi,
         ]);
     }
 

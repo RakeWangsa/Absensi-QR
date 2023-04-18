@@ -64,7 +64,7 @@
                         @php($kelas = \App\Models\Kelas::where('id', $item->id_kelas)->first())
                         <tr>
                           <td scope="row" class="text-center">{{ $no++ }}</td>
-                          <td class="text-center">{{ $item->id }}</td>
+                          <td class="text-center">{{ $item->id_kelas }}</td>
                           <td class="text-center">{{ $kelas->pelajaran }}</td>
                           <td class="text-center">{{ $kelas->guru }}</td>
                           <td class="text-center">{{ $item->status }}</td>

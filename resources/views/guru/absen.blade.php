@@ -83,15 +83,20 @@
                   @php($no=1)
                   @if(count($siswa) > 0)
                   @foreach($siswa as $item)
+                  @php($absensi = \App\Models\Absensi::where('id_siswa', $item->id_siswa)->first())
                    <tr>
                       <td scope="row" class="text-center">{{ $no++ }}</td>
                       <td class="text-center">{{ $item->id_siswa }}</td>
                       <td class="text-center">{{ $item->nama }}</td>
-                      <td class="text-center"></td>
+                      @if(isset($absensi->status))
+                      <td class="text-center">{{ $absensi->status }}</td>
+                      @else
+                      <td class="text-center">Tidak Hadir</td>
+                      @endif
                       <td class="text-center">
-                        <a class="btn btn-primary" style="border-radius: 100px;" a href="{{ route('editKelas', ['id' => base64_encode($item->id)]) }}"><i class="bi bi-check-circle"></i></a>
-                        <a class="btn btn-warning" style="border-radius: 100px;" a href="{{ route('editKelas', ['id' => base64_encode($item->id)]) }}"><i class="bi bi-exclamation-circle"></i></a>
-                        <a class="btn btn-danger" style="border-radius: 100px;" a href="{{ route('editKelas', ['id' => base64_encode($item->id)]) }}"><i class="bi bi-x-circle"></i></a>
+                        <a class="btn btn-primary" style="border-radius: 100px;" a href="{{ route('setHadir', ['id_siswa' => base64_encode($item->id_siswa), 'id_kelas' => base64_encode($id)]) }}"><i class="bi bi-check-circle"></i></a>
+                        <a class="btn btn-warning" style="border-radius: 100px;" a href="{{ route('setIzin', ['id' => base64_encode($item->id_siswa)]) }}"><i class="bi bi-exclamation-circle"></i></a>
+                        {{-- <a class="btn btn-danger" style="border-radius: 100px;" a href="{{ route('setTidakHadir', ['id' => base64_encode($item->id)]) }}"><i class="bi bi-x-circle"></i></a> --}}
                      </td>
                    </tr>
                    @endforeach
